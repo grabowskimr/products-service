@@ -1,22 +1,19 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import React from 'react';
-import './App.css';
-import Home from './components/Home';
-import Service from './components/Service';
 import { Provider } from 'react-redux';
-import {store} from './store';
 
-import Header from './components/Header';
+import {store} from './store';
+import Login from './components/Login';
+import Panel from './components/Panel';
 
 function App() {
   return (
     <Provider store={store}>
-      <div className="App">
+      <div className="app">
         <Router>
-          <Header />
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/service" component={Service} />
+            <Route exact path="/" component={Login} />
+            <Route path="/panel"  component={Panel} />
           </Switch>
         </Router>
       </div>

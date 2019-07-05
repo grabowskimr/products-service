@@ -1,30 +1,18 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 
-import {testFunc} from '../actions/actions';
+import Topbar from '../containers/Topbar';
+import User from './User';
+import Logout from './Logout';
 
 class Header extends Component {
-
-    runTest = (data) => {
-        this.props.testFunc(data);
-    }
-
-    render() {
-        return (
-            <div>
-              <Link to="/">Home</Link>   
-              <Link to="/service">Service</Link>
-              <button onClick={() => {this.runTest('cos innego')}}>test</button>
-            </div>
-        )
-    }
+  render() {
+    return (
+      <Topbar>
+        <User />
+        <Logout />
+      </Topbar>
+    )
+  }
 }
 
-function mapStateToProps(state) {
-    return {
-        test: state.mainReducer.test
-    }
-}
-
-export default connect(mapStateToProps, {testFunc})(Header);
+export default Header;
