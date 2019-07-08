@@ -24,7 +24,8 @@ body {
 	}
 	input[type="text"],
 	input[type="password"],
-	input[type="number"] {
+	input[type="number"],
+	input[type="email"] {
     font-size: 16px;
     padding: 10px 5px;
     border: 1px solid $borderColor;
@@ -34,7 +35,8 @@ body {
 			border: 1px solid black;
 		}
 	}
-	input[type="submit"] {
+	input[type="submit"],
+	button {
     padding: 10px;
     font-size: 18px;
     border: none;

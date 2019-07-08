@@ -7,6 +7,9 @@ const LoginContainer = props => (
       <img src={Logo} alt="logo" />
     </div>
     <div className="login-box">{props.children}</div>
+    <div className="toggleBtn">
+      <button onClick={props.onShowRegister}>{!props.showRegister ? 'Zarejestruj sie' : 'Zaloguj się'}</button>
+    </div>
   </div>
 );
 

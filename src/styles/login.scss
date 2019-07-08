@@ -1,6 +1,21 @@
 .login-container {
   max-width: 400px;
   margin: 30vh auto;
+  & > .toggleBtn {
+    text-align: center;
+    padding: 20px 0px;
+    button {
+      border: none;
+      background: none;
+      font-size: 16px;
+    }
+  }
+  h2 {
+    text-align: center;
+    font-size: 20px;
+    padding: 15px 0px;
+    color: $green;
+  }
   .page-logo {
     text-align: center;
     margin-bottom: 30px;
@@ -11,5 +26,25 @@
     padding: 15px 20px;
     box-shadow: $boxShadow;
     border-radius: 5px;
+    button {
+      width: 100%;
+      padding: 10px;
+      font-size: 18px;
+      border: none;
+      color: #fff;
+      background: $green;
+      border-radius: 5px;
+      transition: all .2s ease-in-out;
+      cursor: pointer;
+      &:hover {
+        background: $greenHover;
+      }
+    }
+  }
+  .error {
+    text-align: center;
+    font-size: 15px;
+    display: block;
+    color: $red;
   }
 }
