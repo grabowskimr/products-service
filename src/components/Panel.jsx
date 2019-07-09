@@ -1,19 +1,33 @@
 import React, { Component } from "react";
 import { Route } from 'react-router-dom';
 import { withCookies } from 'react-cookie';
+import {connect} from 'react-redux';
 
 import Home from './Home';
-import Register from './Register';
+import RegisterProduct from './RegisterProduct';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import PanelContent from '../containers/PanelContent';
 import MainContent from '../containers/MainContent';
+import { setUserId } from '../actions/actions';
+import { getProducts } from '../actions/apiCalls';
 
 class Panel extends Component {
+
+	componentDidMount() {
+		this.props.getProducts();
+		if(!this.props.cookies.get('login')) {
+			this.props.history.push('/');
+		} else {
+			this.props.setUserId(this.props.cookies.get('login').id)
+		}
+	}
 
 	componentDidUpdate() {
 		if(!this.props.cookies.get('login')) {
 			this.props.history.push('/');
+		} else {
+			this.props.setUserId(this.props.cookies.get('login').id)
 		}
 	}
 
@@ -26,7 +40,7 @@ class Panel extends Component {
 					<Sidebar />
 					<MainContent>
 						<Route path={`${this.props.match.url}/home`} component={Home} />
-						<Route path={`${this.props.match.url}/register`} component={Register} />
+						<Route path={`${this.props.match.url}/register`} component={RegisterProduct} />
 					</MainContent>
 				</PanelContent>
       </div>
@@ -34,4 +48,6 @@ class Panel extends Component {
   }
 }
 
-export default withCookies(Panel);
+
+
+export default connect(null, {setUserId, getProducts})(withCookies(Panel));

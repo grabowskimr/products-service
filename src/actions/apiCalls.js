@@ -2,7 +2,6 @@ import axios from 'axios';
 
 import {endpoint} from '../constants/config';
 import actions from './actions';
-import { id } from 'postcss-selector-parser';
 
 const api = {
 	get: (method) => {
@@ -33,4 +32,17 @@ export const loginToApp = (data) => (dispatch) => {
 		}
 		return data;
 	});
+}
+
+export const getProducts = () => (dispatch) => {
+	return api.get('getProducts').then(({data}) => {
+		console.log(data);
+		dispatch(actions.getProducts(data));
+	})
+}
+
+export const addUserProduct = (data) => (dispatch) => {
+	return api.post('addUserProduct', data).then(({data}) => {
+		console.log(data);
+	})
 }

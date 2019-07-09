@@ -5,7 +5,7 @@ const apiActions = {
 		return {
 			type: ACTION.LOGIN,
 			payload: {
-					data
+				data
 			}
 		}
 	},
@@ -13,7 +13,7 @@ const apiActions = {
 		return {
 			type: ACTION.REGISTER,
 			payload: {
-					data
+				data
 			}
 		}
 	},
@@ -21,15 +21,32 @@ const apiActions = {
 		return {
 			type: ACTION.LOGIN_ERROR,
 			payload: {
-					data
+				data
+			}
+		}
+	},
+	getProducts: (data) => {
+		return {
+			type: ACTION.GET_PRODUCTS,
+			payload: {
+				data
 			}
 		}
 	}
 }
 
-export const clearLoginError =  (data) => {
+export const clearLoginError = () => {
 	return {
 		type: ACTION.CLEAR_LOGIN_ERROR
+	}
+}
+
+export const setUserId = (id) => {
+	return {
+		type: ACTION.SET_USER_ID,
+		payload: {
+			id
+		}
 	}
 }
 

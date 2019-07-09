@@ -31,7 +31,7 @@ class Login extends Component {
 			if(data.login) {
 				var today = new Date();
 				today.setHours(today.getHours() + 1);
-				this.props.cookies.set('login', data.login, { path: '/', expires: today });
+				this.props.cookies.set('login', {login: data.login, id: data.id}, { path: '/', expires: today });
 				this.props.history.push('/panel/home');
 			}
 		});

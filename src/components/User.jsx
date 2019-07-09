@@ -11,7 +11,7 @@ class User extends Component {
           <div className="avatar">
             <img src={avatar} alt="avatar"/>
           </div>
-          <span>{this.props.cookies.get('login')}</span>
+          <span>{this.props.cookies.get('login').login}</span>
         </div>
       </div>
     )

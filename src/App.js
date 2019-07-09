@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { CookiesProvider } from 'react-cookie';
+import "react-datepicker/dist/react-datepicker.css";
 
 import {store} from './store';
 import Login from './components/Login';

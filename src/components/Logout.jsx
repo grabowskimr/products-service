@@ -9,7 +9,7 @@ function Logout() {
   }
 
   return (
-    <button className="button" onClick={logout}>Wyloguj</button>
+    <button className="button" title={cookies.login} onClick={logout}>Wyloguj</button>
   )
 }
 

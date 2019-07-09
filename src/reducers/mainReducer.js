@@ -4,7 +4,9 @@ const mainReducer = (state = {
 	login: '',
 	status: '',
 	profile: 'standard',
-	loginError: ''
+	loginError: '',
+	userId: 0,
+	products: []
 }, action) => {
   switch (action.type) {
     case ACTION.LOGIN:
@@ -25,6 +27,16 @@ const mainReducer = (state = {
 			return {
 				...state,
 				loginError: ''
+			}
+		case ACTION.SET_USER_ID:
+			return {
+				...state,
+				userId: action.payload.id
+			}
+		case ACTION.GET_PRODUCTS:
+			return {
+				...state,
+				products: action.payload.data
 			}
     default:
       return state;
