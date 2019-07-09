@@ -1,11 +1,17 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { useCookies } from 'react-cookie';
 
-class Logout extends Component {
-  render() {
-    return (
-      <button className="button">Wyloguj</button>
-    )
+function Logout() {
+  const [cookies, setCookie, removeCookie] = useCookies(['login']);
+  
+  const logout = () => {
+    removeCookie('login', {path: '/'});
   }
+
+  return (
+    <button className="button" onClick={logout}>Wyloguj</button>
+  )
 }
+
 
 export default Logout;

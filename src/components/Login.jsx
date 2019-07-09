@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
+import { withCookies } from 'react-cookie';
 
 import LoginContainer from "../containers/LoginContainer";
 import Input from '../containers/Input';
@@ -28,6 +29,9 @@ class Login extends Component {
 		e.preventDefault();
 		this.props.loginToApp(this.state.form).then((data) => {
 			if(data.login) {
+				var today = new Date();
+				today.setHours(today.getHours() + 1);
+				this.props.cookies.set('login', data.login, { path: '/', expires: today });
 				this.props.history.push('/panel/home');
 			}
 		});
@@ -93,4 +97,4 @@ function mapStateToProps(state) {
 	}
 }
 
-export default connect(mapStateToProps, {registerToApp, loginToApp, clearLoginError})(Login);
+export default connect(mapStateToProps, {registerToApp, loginToApp, clearLoginError})(withCookies(Login));

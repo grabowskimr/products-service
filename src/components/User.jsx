@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withCookies } from 'react-cookie';
 
 import avatar from '../static/images/avatar.png';
 
@@ -10,11 +11,11 @@ class User extends Component {
           <div className="avatar">
             <img src={avatar} alt="avatar"/>
           </div>
-          <span>User</span>
+          <span>{this.props.cookies.get('login')}</span>
         </div>
       </div>
     )
   }
 }
 
-export default User;
+export default withCookies(User);
