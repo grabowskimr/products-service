@@ -21,7 +21,6 @@ class RegisterProduct extends Component {
       ...this.state,
       userId: this.props.userId
     };
-    console.log(data);
     this.props.addUserProduct(data);
   }
 
@@ -42,9 +41,9 @@ class RegisterProduct extends Component {
     return (
       <Box title="Zarejestruj produkt">
         <form onSubmit={this.register}>
-          <Input type="select" placeholder="Produkt" label="Produkt" name="productId" options={this.props.products} value={this.state.productId} onChange={this.changeFormData}/>
-          <Input type="date" label="Data zakupu" value={this.state.orderDate} onChange={this.changeDate} placeholder="Data"/>
-          <Input type="text" placeholder="Numer vin" label="Numer vin" name="vin" value={this.state.vin} onChange={this.changeFormData}/>
+          <Input type="select" placeholder="Produkt" label="Produkt" name="productId" options={this.props.products} value={this.state.productId} onChange={this.changeFormData} required/>
+          <Input type="date" label="Data zakupu" value={this.state.orderDate} onChange={this.changeDate} placeholder="Data" required />
+          <Input type="text" placeholder="Numer vin" label="Numer vin" name="vin" value={this.state.vin} onChange={this.changeFormData} required/>
           <button type="submit">Dodaj</button>
         </form>
       </Box>

@@ -10,12 +10,22 @@ import Sidebar from './Sidebar';
 import PanelContent from '../containers/PanelContent';
 import MainContent from '../containers/MainContent';
 import { setUserId } from '../actions/actions';
-import { getProducts } from '../actions/apiCalls';
+import { getInitialData } from '../actions/apiCalls';
 
 class Panel extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			showPanel: false
+		}
+	}
 
 	componentDidMount() {
-		this.props.getProducts();
+		this.props.getInitialData().then((status) => {
+			this.setState({
+				showPanel: status
+			});
+		});
 		if(!this.props.cookies.get('login')) {
 			this.props.history.push('/');
 		} else {
@@ -34,20 +44,23 @@ class Panel extends Component {
 
   render() {
     return (
-      <div className="panel">
-				<Header />
-				<PanelContent>
-					<Sidebar />
-					<MainContent>
-						<Route path={`${this.props.match.url}/home`} component={Home} />
-						<Route path={`${this.props.match.url}/register`} component={RegisterProduct} />
-					</MainContent>
-				</PanelContent>
-      </div>
+			<>
+				{this.state.showPanel &&
+					<div className="panel">
+						<Header />
+						<PanelContent>
+							<Sidebar />
+							<MainContent>
+								<Route path={`${this.props.match.url}/home`} component={Home} />
+								<Route path={`${this.props.match.url}/register`} component={RegisterProduct} />
+							</MainContent>
+						</PanelContent>
+				</div>}
+			</>
     );
   }
 }
 
 
 
-export default connect(null, {setUserId, getProducts})(withCookies(Panel));
+export default connect(null, {setUserId, getInitialData})(withCookies(Panel));

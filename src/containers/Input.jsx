@@ -7,6 +7,7 @@ const Input = (props) => {
 			{props.label && <label>{props.label}:</label>}
 			{props.type === 'select' ? 
 				<select {...props}>
+					<option value="">Brak</option>
 					{props.options ? props.options.map((opt) => (
 						<option key={opt.id} value={opt.id}>{opt.name}</option>
 					)) : <option>None</option>}

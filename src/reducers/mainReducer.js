@@ -6,7 +6,9 @@ const mainReducer = (state = {
 	profile: 'standard',
 	loginError: '',
 	userId: 0,
-	products: []
+	products: [],
+	userProducts: [],
+	loader: false
 }, action) => {
   switch (action.type) {
     case ACTION.LOGIN:
@@ -16,17 +18,20 @@ const mainReducer = (state = {
 				firstname: action.payload.data.firstname,
 				lastname: action.payload.data.lastname,
 				profile: action.payload.data.profile,
-				loginError: ''
+				loginError: '',
+				loader: false
 			}
 		case ACTION.LOGIN_ERROR:
 			return {
 				...state,
-				loginError: action.payload.data.error
+				loginError: action.payload.data.error,
+				loader: false
 			}
 		case ACTION.CLEAR_LOGIN_ERROR:
 			return {
 				...state,
-				loginError: ''
+				loginError: '',
+				loader: false
 			}
 		case ACTION.SET_USER_ID:
 			return {
@@ -36,7 +41,24 @@ const mainReducer = (state = {
 		case ACTION.GET_PRODUCTS:
 			return {
 				...state,
-				products: action.payload.data
+				products: action.payload.data,
+				loader: false
+			}
+		case ACTION.GET_USER_PRODUCTS:
+			return {
+				...state,
+				userProducts: action.payload.data,
+				loader: false
+			}
+		case ACTION.SHOW_LOADER: 
+			return {
+				...state,
+				loader: true
+			}
+		case ACTION.HIDE_LOADER: 
+			return {
+				...state,
+				loader: false
 			}
     default:
       return state;

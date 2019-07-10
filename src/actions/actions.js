@@ -32,7 +32,26 @@ const apiActions = {
 				data
 			}
 		}
+	},
+	getUserProducts: (data) => {
+		return {
+			type: ACTION.GET_USER_PRODUCTS,
+			payload: {
+				data
+			}
+		}
+	},
+	showLoader: () => {
+		return {
+			type: ACTION.SHOW_LOADER
+		}
+	},
+	hideLoader: () => {
+		return {
+			type: ACTION.HIDE_LOADER
+		}
 	}
+
 }
 
 export const clearLoginError = () => {

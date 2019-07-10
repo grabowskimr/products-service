@@ -7,6 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import {store} from './store';
 import Login from './components/Login';
 import Panel from './components/Panel';
+import Loader from './containers/Loader';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             </Switch>
           </Router>
         </div>
+      <Loader />
       </Provider>
     </CookiesProvider>
   );
