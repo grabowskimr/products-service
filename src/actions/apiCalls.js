@@ -4,7 +4,7 @@ import {endpoint} from '../constants/config';
 import actions from './actions';
 
 const api = {
-	get: (method) => {
+	get: (method, params = {}) => {
 		return axios.get(`${endpoint}?action=${method}`);
 	},
 	post: (method, data) => {
@@ -58,8 +58,7 @@ export const getProducts = () => (dispatch) => {
 export const getUserProducts = () => (dispatch) => {
 	dispatch(actions.showLoader());
 	return getUserProductsData().then((data) => {
-		console.log(data);
-		dispatch(actions.getProducts(data));
+		dispatch(actions.getUserProducts(data));
 		return data;
 	})
 }
@@ -74,10 +73,9 @@ export const addUserProduct = (data) => (dispatch) => {
 
 export const getInitialData = () => (dispatch) => {
 	dispatch(actions.showLoader());
-	return axios.all([getProductsData(), getUserProductsData()])
-		.then(axios.spread(function (products, userProducts) {
+	return axios.all([getProductsData()])
+		.then(axios.spread(function (products) {
 			dispatch(actions.getProducts(products));
-			dispatch(actions.getUserProducts(userProducts));
 			dispatch(actions.hideLoader());
 			return true;
 		})

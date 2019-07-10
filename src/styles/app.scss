@@ -183,11 +183,16 @@ button {
 	box-shadow: $boxShadow;
 	background: white;
 	box-sizing: border-box;
-	max-width: 600px;
 	border-radius: 5px;
 	margin: 10px;
 	width: 95%;
 	overflow: hidden;
+	&.size-1 {
+		max-width: 600px;
+	}
+	&.size-2 {
+		max-width: 900px;
+	}
 	.box-content {
 		padding: 30px 20px;
 	}
@@ -198,5 +203,49 @@ button {
     text-transform: uppercase;
     font-weight: 600;
     color: $dark;
+	}
+}
+.list {
+	list-style: none;
+	.title-li {
+		display: flex;
+		background: $light;
+		span {
+			display: block;
+			padding: 10px;
+			&.flex-1 {
+				flex: 1;
+			}
+			&.flex-2 {
+				flex: 2;
+			}
+			&.flex-3 {
+				flex: 3
+			}
+		}
+	}
+	.product-item-list {
+		.product-item {
+			display: flex;
+			text-decoration: none;
+			color: $dark;
+			align-items: center;
+			.item-actions {
+				display: flex;
+				flex: 2;
+				align-items: center;
+				button {
+					margin-right: 5px;
+					font-size: 15px;
+					padding: 10px;
+				}
+			}
+			& > * {
+				flex: 1;
+				padding: 10px;
+				color: $dark;
+				text-decoration: none;
+			}
+		}
 	}
 }

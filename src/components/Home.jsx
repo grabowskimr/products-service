@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 
+import ProductList from './ProductList';
+
 class Home extends Component {
   render() {
-    return <div>Home</div>;
+    return (
+      <ProductList />
+    );
   }
 }
 

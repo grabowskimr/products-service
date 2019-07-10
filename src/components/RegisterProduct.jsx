@@ -11,7 +11,8 @@ class RegisterProduct extends Component {
     this.state = {
       productId: '',
       vin: '',
-      orderDate: ''
+      orderDate: '',
+      wariancy: ''
     }
   }
 
@@ -37,12 +38,19 @@ class RegisterProduct extends Component {
     })
   }
 
+  changeWariancyDate = (date) => {
+    this.setState({
+      wariancy: date
+    })
+  }
+
   render() {
     return (
       <Box title="Zarejestruj produkt">
         <form onSubmit={this.register}>
           <Input type="select" placeholder="Produkt" label="Produkt" name="productId" options={this.props.products} value={this.state.productId} onChange={this.changeFormData} required/>
           <Input type="date" label="Data zakupu" value={this.state.orderDate} onChange={this.changeDate} placeholder="Data" required />
+          <Input type="date" label="Gwarancja do" value={this.state.wariancy} onChange={this.changeWariancyDate} placeholder="Data" required />
           <Input type="text" placeholder="Numer vin" label="Numer vin" name="vin" value={this.state.vin} onChange={this.changeFormData} required/>
           <button type="submit">Dodaj</button>
         </form>
