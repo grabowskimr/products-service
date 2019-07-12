@@ -50,6 +50,14 @@ const apiActions = {
 		return {
 			type: ACTION.HIDE_LOADER
 		}
+	},
+	setStatusService: (id) => {
+		return {
+			type: ACTION.SET_STATUS_SERVICE,
+			payload: {
+				id
+			}
+		}
 	}
 
 }
@@ -65,6 +73,15 @@ export const setUserId = (id) => {
 		type: ACTION.SET_USER_ID,
 		payload: {
 			id
+		}
+	}
+}
+
+export const filterUserProducts = (phase) => {
+	return {
+		type: ACTION.FILTER_USER_PRODUCTS,
+		payload: {
+			phase
 		}
 	}
 }

@@ -17,7 +17,7 @@ function App() {
           <Router>
             <Switch>
               <Route exact path="/" component={Login} />
-              <Route path="/panel"  component={Panel} />
+              <Route path="/panel/:userId"  component={Panel} />
             </Switch>
           </Router>
         </div>

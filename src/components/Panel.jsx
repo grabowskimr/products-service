@@ -9,6 +9,7 @@ import Header from './Header';
 import Sidebar from './Sidebar';
 import PanelContent from '../containers/PanelContent';
 import MainContent from '../containers/MainContent';
+import ReportError from '../components/ReportError';
 import { setUserId } from '../actions/actions';
 import { getInitialData } from '../actions/apiCalls';
 
@@ -49,10 +50,11 @@ class Panel extends Component {
 					<div className="panel">
 						<Header />
 						<PanelContent>
-							<Sidebar />
+							<Sidebar userId={this.props.cookies.get('login') && this.props.cookies.get('login').id} />
 							<MainContent>
 								<Route path={`${this.props.match.url}/home`} component={Home} />
 								<Route path={`${this.props.match.url}/register`} component={RegisterProduct} />
+								<Route path={`${this.props.match.url}/product/:id/report`} component={ReportError} />
 							</MainContent>
 						</PanelContent>
 				</div>}

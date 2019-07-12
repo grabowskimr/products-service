@@ -7,7 +7,8 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
-button {
+button,
+.button {
 	width: 100%;
 	padding: 10px;
 	font-size: 18px;
@@ -17,8 +18,14 @@ button {
 	border-radius: 5px;
 	transition: all .2s ease-in-out;
 	cursor: pointer;
+	text-decoration: none;
+	text-align: center;
+	line-height: normal;
 	&:hover {
 		background: $greenHover;
+	}
+	&.submited {
+		background: $submited;
 	}
 }
 .app {
@@ -54,6 +61,11 @@ button {
 		&:focus {
 			border: 1px solid black;
 		}
+		&.linestyle {
+			border: none;
+			border-bottom: 1px solid $borderColor;
+			border-radius: 0px;
+		}
 	}
 	.react-datepicker__input-container {
 		width: 100%;
@@ -85,7 +97,10 @@ button {
 	height: 54px;
 	box-sizing: border-box;
 	z-index: 99;
-	position: relative;
+	position: fixed;
+	width: 100%;
+	top: 0px;
+	left: 0px;
 	.logo {
 		max-width: 180px;
 	}
@@ -97,6 +112,7 @@ button {
 .panel-content {
 	min-height: calc(100vh - 54px);
 	display: flex;
+	margin-top: 54px;
 	.sidebar {
     width: 200px;
     min-width: 200px;
@@ -105,7 +121,7 @@ button {
     box-sizing: border-box;
     background: white;
     margin-top: -54px;
-    position: relative;
+    position: fixed;
 		z-index: 99;
 		&:after {
 			content: "";
@@ -126,6 +142,7 @@ button {
 	.main {
 		width: 100%;
 		padding: 30px;
+		margin-left: 200px;
 		box-sizing: border-box;
 	}
 }
@@ -149,6 +166,7 @@ button {
 	span {
 		font-size: 15px;
 		text-transform: uppercase;
+		white-space: nowrap;
 	}
 }
 .menu {
@@ -167,7 +185,7 @@ button {
 		}
 	}
 }
-.button {
+.button-logout {
 	background: $red;
 	border: none;
 	color: #fff;
@@ -184,14 +202,17 @@ button {
 	background: white;
 	box-sizing: border-box;
 	border-radius: 5px;
-	margin: 10px;
-	width: 95%;
+	margin: 10px 0px;
+	width: 100%;
 	overflow: hidden;
 	&.size-1 {
 		max-width: 600px;
 	}
 	&.size-2 {
 		max-width: 900px;
+	}
+	&.size-100 {
+		max-width: 100%;
 	}
 	.box-content {
 		padding: 30px 20px;
@@ -234,7 +255,8 @@ button {
 				display: flex;
 				flex: 2;
 				align-items: center;
-				button {
+				button,
+				.button {
 					margin-right: 5px;
 					font-size: 15px;
 					padding: 10px;
@@ -247,5 +269,14 @@ button {
 				text-decoration: none;
 			}
 		}
+	}
+}
+.search {
+	margin-bottom: 20px;
+	.box-content {
+		padding: 5px 20px;
+	}
+	input {
+		text-align: center;
 	}
 }

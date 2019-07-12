@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
+import { withCookies } from 'react-cookie';
 
 import Box from '../containers/Box';
 import List from '../containers/List';
 import ProductItemList from '../containers/ProductItemList';
-import { getUserProducts } from '../actions/apiCalls';
+import { getUserProducts, setStatusService } from '../actions/apiCalls';
 
 class ProductList extends Component {
   constructor(props) {
@@ -21,17 +22,28 @@ class ProductList extends Component {
   }
 
   componentDidMount() {
-    this.props.getUserProducts();
+    this.props.getUserProducts(this.props.cookies.get('login').id);
+  }
+
+  orderService = (e) => {
+    this.props.setStatusService({
+      id: e.target.dataset.product,
+      userId: this.props.cookies.get('login').id,
+      type: 'service',
+      status: 1
+    });
   }
 
   render() {
     return (
-      <Box title="Lista produktów" list size={2}>
-        {this.props.userProducts ?
+      <Box title="Lista produktów" list size={100}>
+        {this.props.userProducts.length ?
         <List titles={this.state.titles} >
-          {this.props.userProducts.map(product => (
-            <ProductItemList key={product.id} product={product}/>
-          ))}
+          {this.props.userProducts.map(product => {
+            if(!product.hidden) {
+              return <ProductItemList key={product.id} product={product} orderService={this.orderService} />;
+            }
+          })}
         </List> : 
         <h3>Brak produktów</h3>}
       </Box>
@@ -45,4 +57,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, {getUserProducts})(ProductList);
+export default connect(mapStateToProps, {getUserProducts, setStatusService})(withCookies(ProductList));

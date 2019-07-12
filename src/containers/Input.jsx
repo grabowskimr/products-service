@@ -15,7 +15,7 @@ const Input = (props) => {
 				: props.type === 'date' ? 
 					<DatePicker className='date-picker' selected={props.value} {...props} /> 
 				:
-					<input type={props.type ? props.type : 'text'} {...props} />
+					<input type={props.type ? props.type : 'text'} {...props} className={`${props.linestyle ? 'linestyle' : null}`}/>
 			}
 		</div>
 	)

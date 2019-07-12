@@ -8,7 +8,7 @@ class Sidebar extends Component {
     return (
       <SidebarContainer>
         <h2>Menu</h2>
-        <Menu />
+        <Menu userId={this.props.userId} />
       </SidebarContainer>
     )
   }
