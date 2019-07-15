@@ -86,4 +86,19 @@ export const filterUserProducts = (phase) => {
 	}
 }
 
+export const showMessage = (message) => {
+	return {
+		type: ACTION.SHOW_MESSAGE,
+		payload: {
+			message
+		}
+	}
+}
+
+export const hideMessage = () => {
+	return {
+		type: ACTION.HIDE_MESSAGE
+	}
+}
+
 export default apiActions;

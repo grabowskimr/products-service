@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import {endpoint} from '../constants/config';
-import actions from './actions';
+import actions, { showMessage } from './actions';
 
 const makeid = (length) => {
 	var result           = '';
@@ -53,7 +53,6 @@ const api = {
 			})
 		}
 		return checkSession(ignoreSession).then(({data}) => {
-			console.log(data.status);
 			if(data.status) {
 				return axios.post(endpoint, {
 					...postData,
@@ -83,6 +82,7 @@ const getUserProductsData = (id) => {
 export const registerToApp = (data) => (dispatch) => {
 	dispatch(actions.showLoader());
 	api.post('register', data, true).then(({data}) => {
+		dispatch(showMessage(data));
 		dispatch(actions.hideLoader());
 	})
 }
@@ -91,9 +91,10 @@ export const loginToApp = (data) => (dispatch) => {
 	dispatch(actions.showLoader());
 	data.session_id = makeid(35);
 	return api.post('loginToApp', data, true).then(({data}) => {
-		if(!data.error) {
+		if(data.status) {
 			dispatch(actions.login(data));
 		} else {
+			dispatch(showMessage(data));
 			dispatch(actions.loginError(data));
 		}
 		return data;
@@ -119,7 +120,7 @@ export const getUserProducts = (id) => (dispatch) => {
 export const addUserProduct = (data) => (dispatch) => {
 	dispatch(actions.showLoader());
 	return api.post('addUserProduct', data).then(({data}) => {
-		console.log(data);
+		dispatch(showMessage(data));
 		dispatch(actions.hideLoader());
 	})
 }
@@ -135,12 +136,13 @@ export const getInitialData = () => (dispatch) => {
 	);
 }
 
-export const setStatusService = (data) => (dispatch) => {
+export const setStatusService = (service) => (dispatch) => {
 	dispatch(actions.showLoader());
-	return api.post('setStatusService', data).then(response => {
-		if(response.status) {
-			dispatch(actions.setStatusService(data.id));
+	return api.post('setStatusService', service).then(({data}) => {
+		if(data.status) {
+			dispatch(actions.setStatusService(service.id));
 		}
+		dispatch(showMessage(data));
 		dispatch(actions.hideLoader());
 	});
 }

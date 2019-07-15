@@ -8,7 +8,12 @@ const mainReducer = (state = {
 	userId: 0,
 	products: [],
 	userProducts: [],
-	loader: false
+	loader: false,
+	showMessage: false,
+	message: {
+		status: 1,
+		message: 'Message'
+	}
 }, action) => {
   switch (action.type) {
     case ACTION.LOGIN:
@@ -24,7 +29,7 @@ const mainReducer = (state = {
 		case ACTION.LOGIN_ERROR:
 			return {
 				...state,
-				loginError: action.payload.data.error,
+				loginError: action.payload.data.message,
 				loader: false
 			}
 		case ACTION.CLEAR_LOGIN_ERROR:
@@ -83,6 +88,17 @@ const mainReducer = (state = {
 			return {
 				...state,
 				userProducts: updatedUserProducts
+			}
+		case ACTION.SHOW_MESSAGE:
+			return {
+				...state,
+				showMessage: true,
+				message: action.payload.message
+			}
+		case ACTION.HIDE_MESSAGE:
+			return {
+				...state,
+				showMessage: false
 			}
     default:
       return state;

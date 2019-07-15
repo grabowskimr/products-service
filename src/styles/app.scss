@@ -280,3 +280,23 @@ button,
 		text-align: center;
 	}
 }
+.notification {
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+	padding: 15px 40px;
+	background: $dark;
+	border-radius: 5px;
+	font-size: 17px;
+	box-shadow: $boxShadow;
+	z-index: 999;
+	transition: all .2s ease-in-out;
+	transform: translateY(70px);
+	color: #fff;
+	&.show {
+		transform: translateY(0px);
+	}
+	&.success {
+		background: $green;
+	}
+}
