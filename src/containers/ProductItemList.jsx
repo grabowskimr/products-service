@@ -13,7 +13,7 @@ const ProductItemList = (props) => {
         <span>{product.wariancy}</span>
         <div className="item-actions">
           <button data-product={product.id} onClick={props.orderService} disabled={product.status_reqular_fix === '1' ? true : false} className={product.status_reqular_fix === '1' ? 'submited' : ''}>{product.status_reqular_fix === '1' ? 'Serwis zamówiony' : 'Zamów serwis'}</button>
-          <Link to={`product/${product.id}/report`} onClick={props.reportAnError} className="button">Zgłoś usterke</Link>
+          <Link to={`product/${product.id}/report`} disabled={product.status === '1' ? true : false} onClick={props.reportAnError} className={`button report-button ${product.status === '1' ? 'submited' : ''}`}>Zgłoś usterke</Link>
         </div>
       </div>
     </li>

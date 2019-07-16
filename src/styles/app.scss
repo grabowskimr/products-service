@@ -7,6 +7,9 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+textarea {
+	min-height: 180px;
+}
 button,
 .button {
 	width: 100%;
@@ -26,6 +29,11 @@ button,
 	}
 	&.submited {
 		background: $submited;
+		cursor: default;
+		pointer-events: none;
+		&.report-button {
+			background: $borderColor;
+		}
 	}
 }
 .app {
@@ -48,7 +56,8 @@ button,
 	input[type="number"],
 	input[type="email"],
 	select,
-	.date-picker {
+	.date-picker,
+	textarea {
     font-size: 16px;
     padding: 0px 5px;
     border: 1px solid $borderColor;
@@ -66,6 +75,9 @@ button,
 			border-bottom: 1px solid $borderColor;
 			border-radius: 0px;
 		}
+	}
+	textarea {
+		padding: 10px 5px;
 	}
 	.react-datepicker__input-container {
 		width: 100%;

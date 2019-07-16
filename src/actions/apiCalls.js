@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {endpoint} from '../constants/config';
+import {endpoint, host} from '../constants/config';
 import actions, { showMessage } from './actions';
 
 const makeid = (length) => {
@@ -27,6 +27,7 @@ const checkSession = () => {
 			checkSession: true
 		})
 	} else {
+		document.cookie = 'login=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 		window.location.href = "/";
 	}
 }
@@ -41,23 +42,24 @@ const api = {
 			if(data.status) {
 				return axios.get(`${endpoint}?action=${method}`);
 			} else {
+				document.cookie = 'login=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 				window.location.href = "/";
 			}
 		})
 	},
-	post: (method, postData, ignoreSession) => {
+	post: (method, postData, ignoreSession, config) => {
 		if(ignoreSession) {
 			return axios.post(endpoint, {
 				...postData,
 				[method]: true
-			})
+			}, config)
 		}
 		return checkSession(ignoreSession).then(({data}) => {
 			if(data.status) {
 				return axios.post(endpoint, {
 					...postData,
 					[method]: true
-				})
+				}, config)
 			} else {
 				this.props.history.push('/');
 			}
@@ -144,5 +146,49 @@ export const setStatusService = (service) => (dispatch) => {
 		}
 		dispatch(showMessage(data));
 		dispatch(actions.hideLoader());
+	});
+}
+
+export const sendErrorReport = (errorData) => (dispatch) => {
+	dispatch(actions.showLoader());
+	const formData = new FormData();
+	formData.append('image', errorData.file);
+	const config = {
+		headers: {
+			'content-type': 'multipart/form-data'
+		}
+	}
+	if(!errorData.file) {
+		return api.post('saveErrorData', errorData).then(({data}) => {
+			dispatch(showMessage(data));
+			dispatch(actions.hideLoader());
+		});
+	}
+	return axios.post(`${host}/upload.php`, formData, config).then((response) => {
+		if(!response.data.status) {
+			dispatch(actions.hideLoader());
+			dispatch(showMessage(response.data));
+			return;
+		} else {
+			const filePath = response.data.message;
+			errorData.file = filePath;
+			return api.post('saveErrorData', errorData).then(({data}) => {
+				dispatch(showMessage(data));
+				dispatch(actions.hideLoader());
+			});
+		}
+	});
+}
+
+export const checkIfReportExist = (service) => (dispatch) => {
+	dispatch(actions.showLoader());
+	return api.post('checkReportstatus', service).then(({data}) => {
+		if(data.status) {
+			dispatch(actions.hideLoader());
+			return data;
+		} else {
+			dispatch(showMessage(data));
+			return data;
+		}
 	});
 }

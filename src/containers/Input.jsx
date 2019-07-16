@@ -12,6 +12,8 @@ const Input = (props) => {
 						<option key={opt.id} value={opt.id}>{opt.name}</option>
 					)) : <option>None</option>}
 				</select> 
+				: props.type === 'textarea' ? 
+					<textarea {...props}/>
 				: props.type === 'date' ? 
 					<DatePicker className='date-picker' selected={props.value} {...props} /> 
 				:
