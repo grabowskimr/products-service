@@ -207,3 +207,12 @@ export const getProductInfo = (params) => (dispatch) => {
 		})
 	})
 }
+
+
+export const getUsers = () => (dispatch) => {
+	dispatch(actions.showLoader());
+	return api.get('getUsers').then(({data}) => {
+		dispatch(actions.hideLoader());
+		return data;
+	})
+}

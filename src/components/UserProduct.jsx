@@ -34,7 +34,6 @@ class UserProduct extends Component {
       productId: this.props.match.params.id,
       userId: this.props.cookies.get('login').id
     }).then((data) => {
-      console.log(data);
       this.setState({
         history: data.history,
         product: data.product
