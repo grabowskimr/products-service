@@ -24,6 +24,7 @@ const checkSession = () => {
 		return axios.post(endpoint, {
 			session_id: cookie.session_id,
 			user_id: parseInt(cookie.id),
+			profile: cookie.profile,
 			checkSession: true
 		})
 	} else {
@@ -32,15 +33,14 @@ const checkSession = () => {
 	}
 }
 
-
 const api = {
-	get: (method, ignoreSession) => {
+	get: (method, ignoreSession, params) => {
 		if(ignoreSession) {
-			return axios.get(`${endpoint}?action=${method}`);
+			return axios.get(`${endpoint}?action=${method}`, {params});
 		}
 		return checkSession().then(({data}) => {
 			if(data.status) {
-				return axios.get(`${endpoint}?action=${method}`);
+				return axios.get(`${endpoint}?action=${method}`, {params});
 			} else {
 				document.cookie = 'login=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 				window.location.href = "/";
@@ -139,6 +139,7 @@ export const getInitialData = () => (dispatch) => {
 }
 
 export const setStatusService = (service) => (dispatch) => {
+	service.date = new Date();
 	dispatch(actions.showLoader());
 	return api.post('setStatusService', service).then(({data}) => {
 		if(data.status) {
@@ -150,6 +151,7 @@ export const setStatusService = (service) => (dispatch) => {
 }
 
 export const sendErrorReport = (errorData) => (dispatch) => {
+	errorData.date = new Date();
 	dispatch(actions.showLoader());
 	const formData = new FormData();
 	formData.append('image', errorData.file);
@@ -191,4 +193,17 @@ export const checkIfReportExist = (service) => (dispatch) => {
 			return data;
 		}
 	});
+}
+
+export const getProductInfo = (params) => (dispatch) => {
+	dispatch(actions.showLoader());
+	return api.get('getProductHistory', false, params).then(response => {
+		return api.get('getProduct', false, params).then((product) => {
+			dispatch(actions.hideLoader());
+			return {
+				product: product.data[0],
+				history: response.data
+			}
+		})
+	})
 }

@@ -28,11 +28,17 @@ button,
 		background: $greenHover;
 	}
 	&.submited {
-		background: $submited;
+		background: $borderColor;
 		cursor: default;
 		pointer-events: none;
 		&.report-button {
 			background: $borderColor;
+		}
+	}
+	&.dark {
+		background: $darkGery;
+		&:hover {
+			background: $darkGeryHover;
 		}
 	}
 }
@@ -124,7 +130,8 @@ button,
 .panel-content {
 	min-height: calc(100vh - 54px);
 	display: flex;
-	margin-top: 54px;
+	margin-top: 0px;
+	padding-top: 54px;
 	.sidebar {
     width: 200px;
     min-width: 200px;
@@ -266,12 +273,14 @@ button,
 			.item-actions {
 				display: flex;
 				flex: 2;
-				align-items: center;
 				button,
 				.button {
 					margin-right: 5px;
 					font-size: 15px;
 					padding: 10px;
+					display: flex;
+					justify-content: center;
+					align-items: center;
 				}
 			}
 			& > * {
@@ -311,4 +320,67 @@ button,
 	&.success {
 		background: $green;
 	}
+}
+.flex-container {
+	display: flex;
+	&.flex-2 {
+		& > div {
+			flex: 1;
+			width: 50%;
+		}
+	}
+	&.flex-3 {
+		& > div {
+			flex: 1;
+			width: 33.333%;
+		}
+	}
+	&.flex-4 {
+		& > div {
+			flex: 1;
+			width: 25%;
+		}
+	}
+}
+.label {
+	margin-bottom: 10px;
+	display: block;
+	max-width: 200px;
+	padding: 10px;
+	background: $light;
+	border-radius: 5px;
+	h3 {
+		font-size: 15px;
+		margin-bottom: 5px;
+    color: $red;
+	}
+	span {
+		color: $dark;
+		font-size: 18px;
+	}
+}
+.history-item {
+	display: flex;
+	width: 100%;
+	transition: all .2s ease-in-out;
+	border-bottom: 1px solid $light;
+	span {
+		padding: 15px 10px;
+		flex: 1;
+	}
+	&:hover {
+		background: $light;
+	}
+
+}
+.history-labels {
+	display: flex;
+	width: 100%;
+	span {
+		padding: 5px 10px;
+		flex: 1;
+	}
+	background: $light;
+	padding: 10px 0px;
+	border-bottom: 1px solid $dark;
 }

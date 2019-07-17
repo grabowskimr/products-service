@@ -43,9 +43,12 @@ class ReportError extends Component {
 
   submit = (e) => {
     e.preventDefault();
-    this.props.sendErrorReport(this.state).then(() => {
-      this.props.history.push(`/panel/${this.state.userId}/home`);
-    });
+    let confirmValue = window.confirm('Zgłosić serwis?');
+    if(confirmValue) {
+      this.props.sendErrorReport(this.state).then(() => {
+        this.props.history.push(`/panel/${this.state.userId}/home`);
+      });
+    }
   }
 
   render() {

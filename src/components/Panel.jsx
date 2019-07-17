@@ -7,9 +7,11 @@ import Home from './Home';
 import RegisterProduct from './RegisterProduct';
 import Header from './Header';
 import Sidebar from './Sidebar';
+import UserProduct from './UserProduct';
 import PanelContent from '../containers/PanelContent';
 import MainContent from '../containers/MainContent';
 import ReportError from '../components/ReportError';
+import HomeAdmin from './HomeAdmin';
 import { setUserId } from '../actions/actions';
 import { getInitialData } from '../actions/apiCalls';
 
@@ -17,7 +19,8 @@ class Panel extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			showPanel: false
+			showPanel: false,
+			profile: this.props.cookies.get('login').profile
 		}
 	}
 
@@ -52,8 +55,9 @@ class Panel extends Component {
 						<PanelContent>
 							<Sidebar userId={this.props.cookies.get('login') && this.props.cookies.get('login').id} />
 							<MainContent>
-								<Route path={`${this.props.match.url}/home`} component={Home} />
+								<Route path={`${this.props.match.url}/home`} component={this.state.profile === 'admin' ? HomeAdmin : Home} />
 								<Route path={`${this.props.match.url}/register`} component={RegisterProduct} />
+								<Route exact path={`${this.props.match.url}/product/:id`} component={UserProduct} />
 								<Route path={`${this.props.match.url}/product/:id/report`} component={ReportError} />
 							</MainContent>
 						</PanelContent>

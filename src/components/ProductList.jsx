@@ -26,12 +26,15 @@ class ProductList extends Component {
   }
 
   orderService = (e) => {
-    this.props.setStatusService({
-      id: e.target.dataset.product,
-      userId: this.props.cookies.get('login').id,
-      type: 'service',
-      status: 1
-    });
+    let confirmValue = window.confirm('Zgłosić serwis?');
+    if(confirmValue) {
+      this.props.setStatusService({
+        id: e.target.dataset.product,
+        userId: this.props.cookies.get('login').id,
+        type: 'service',
+        status: 1
+      });
+    }
   }
 
   render() {

@@ -24,6 +24,7 @@ function App() {
         </div>
         <Loader />
         <Notification />
+        <div id="modal"></div>
       </Provider>
     </CookiesProvider>
   );
