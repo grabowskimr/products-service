@@ -5,7 +5,7 @@ import ProductList from './ProductList';
 import Search from '../containers/Search';
 import { filterUserProducts } from '../actions/actions';
 
-class Home extends Component {
+class Client extends Component {
 
   search = (e) => {
     this.props.filterUserProducts(e.target.value);
@@ -14,11 +14,12 @@ class Home extends Component {
   render() {
     return (
       <>
+        {this.props.children}
         <Search filterMethod={this.search}/>
-        <ProductList />
+        <ProductList userId={this.props.userId}/>
       </>
     );
   }
 }
 
-export default connect(null, {filterUserProducts})(Home);
+export default connect(null, {filterUserProducts})(Client);

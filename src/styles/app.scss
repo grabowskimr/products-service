@@ -384,3 +384,27 @@ button,
 	padding: 10px 0px;
 	border-bottom: 1px solid $dark;
 }
+.user-link,
+.users-list-titles {
+	display: flex;
+	width: 100%;
+	padding: 10px;
+	color: $dark;
+	text-decoration: none;
+	transition: all .2s ease-in-out;
+	&:hover {
+		background: $light;
+	}
+	&.hide {
+		display: none;
+	}
+	span {
+		flex: 1;
+		display: block;
+		padding: 0px 10px;
+	}
+}
+.users-list-titles {
+	background: $light;
+	padding: 15px 10px;
+}

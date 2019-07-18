@@ -22,7 +22,7 @@ class ProductList extends Component {
   }
 
   componentDidMount() {
-    this.props.getUserProducts(this.props.cookies.get('login').id);
+    this.props.getUserProducts(this.props.cookies.get('login').profile === 'admin' ? this.props.userId : this.props.cookies.get('login').id);
   }
 
   orderService = (e) => {

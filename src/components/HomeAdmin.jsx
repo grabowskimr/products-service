@@ -13,6 +13,7 @@ class HomeAdmin extends Component {
       users: []
     }
   }
+
   componentDidMount() {
     this.props.getUsers().then((users) => {
       this.setState({
@@ -21,13 +22,43 @@ class HomeAdmin extends Component {
     })
   }
 
+  search = (e) => {
+    let users = this.state.users;
+    let searchText = e.target.value.toUpperCase();
+    users.map((user) => {
+      var show = (user.login.toUpperCase().includes(searchText)) || (user.company.toUpperCase().includes(searchText)) || (user.lastname.toUpperCase().includes(searchText));
+      if(show) {
+        user.hide = false;
+      } else {
+        user.hide = true;
+      }
+      return user;
+    })
+    this.setState({
+      users: users
+    });
+  }
+
   render() {
     return (
       <>
-        <Search />
+        <Search filterMethod={this.search} placeholder="Szukaj: login, nazwisko, firma" />
         <Box title="Klienci" list size={100}>
+          <div className="users-list-titles">
+            <span>Login</span>
+            <span>Imie i nazwisko</span>
+            <span>Firma</span>
+            <span>E-mail</span>
+            <span>Telefon</span>
+          </div>
           {this.state.users.map((user) => (
-            <Link>{user.login}</Link>
+            <Link to={`klient/${user.id}`} key={user.id} className={`user-link ${!user.hide ? 'show' : 'hide'}`}>
+              <span>{user.login}</span>
+              <span>{user.firstname} {user.lastname}</span>
+              <span>{user.company}</span>
+              <span>{user.email}</span>
+              <span>{user.tel}</span>
+            </Link>
           ))}
         </Box>
       </>
