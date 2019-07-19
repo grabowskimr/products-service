@@ -4,7 +4,7 @@ import { withCookies } from 'react-cookie';
 
 import LoginContainer from "../containers/LoginContainer";
 import Input from '../containers/Input';
-import { clearLoginError } from '../actions/actions';
+import { clearLoginError, setProfile } from '../actions/actions';
 import { registerToApp, loginToApp } from '../actions/apiCalls';
 
 class Login extends Component {
@@ -32,6 +32,7 @@ class Login extends Component {
 				var today = new Date();
 				today.setHours(today.getHours() + 1);
 				this.props.cookies.set('login', {login: data.login, id: data.id, session_id: data.session_id, profile: data.profile}, { path: '/', expires: today });
+				this.props.setProfile(data.profile);
 				this.props.history.push(`/panel/${data.id}/home`);
 			}
 		});
@@ -97,4 +98,4 @@ function mapStateToProps(state) {
 	}
 }
 
-export default connect(mapStateToProps, {registerToApp, loginToApp, clearLoginError})(withCookies(Login));
+export default connect(mapStateToProps, {registerToApp, loginToApp, clearLoginError, setProfile})(withCookies(Login));

@@ -13,7 +13,8 @@ const mainReducer = (state = {
 	message: {
 		status: 1,
 		message: 'Message'
-	}
+	},
+	isAdmin: false
 }, action) => {
   switch (action.type) {
     case ACTION.LOGIN:
@@ -89,6 +90,28 @@ const mainReducer = (state = {
 				...state,
 				userProducts: updatedUserProducts
 			}
+		case ACTION.CHANGE_SERVICE_STATUS:
+			let updatedUserProductsStatus = state.userProducts.map(product => {
+				if(product.id === action.payload.id) {
+					product.status_reqular_fix = '0';
+				}
+				return product;
+			});
+			return {
+				...state,
+				userProducts: updatedUserProductsStatus
+			}
+		case ACTION.CHANGE_REPORT_STATUS:
+			let updatedUserProductsReports = state.userProducts.map(product => {
+				if(product.id === action.payload.id) {
+					product.status = '0';
+				}
+				return product;
+			});
+			return {
+				...state,
+				userProducts: updatedUserProductsReports
+			}
 		case ACTION.SHOW_MESSAGE:
 			return {
 				...state,
@@ -99,6 +122,11 @@ const mainReducer = (state = {
 			return {
 				...state,
 				showMessage: false
+			}
+		case ACTION.SET_PROFILE:
+			return {
+				...state,
+				isAdmin: action.payload.profile === 'admin' ? true : false
 			}
     default:
       return state;

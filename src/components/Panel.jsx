@@ -21,7 +21,8 @@ class Panel extends Component {
 		super(props);
 		this.state = {
 			showPanel: false,
-			profile: this.props.cookies.get('login').profile
+			profile: this.props.cookies.get('login').profile,
+			isAdmin: this.props.cookies.get('login').profile === 'admin' ? true : false
 		}
 	}
 
@@ -58,9 +59,9 @@ class Panel extends Component {
 							<MainContent>
 								<Route path={`${this.props.match.url}/home`} component={this.state.profile === 'admin' ? HomeAdmin : Client} />
 								<Route path={`${this.props.match.url}/register`} component={RegisterProduct} />
-								<Route exact path={`${this.props.match.url}/product/:id`} component={UserProduct} />
-								<Route path={`${this.props.match.url}/product/:id/report`} component={ReportError} />
-								<Route path={`${this.props.match.url}/klient/:id`} component={ClientPreview} />
+								<Route exact path={`${this.props.match.url}${this.state.isAdmin ? '/klient/:userId' : ''}/product/:productId`} component={UserProduct} />
+								<Route path={`${this.props.match.url}${this.state.isAdmin ? '/klient/:userId' : ''}/product/:productId/report`} component={ReportError} />
+								<Route exact path={`${this.props.match.url}/klient/:userId`} component={ClientPreview} />
 							</MainContent>
 						</PanelContent>
 				</div>}

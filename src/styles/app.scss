@@ -402,6 +402,10 @@ button,
 		flex: 1;
 		display: block;
 		padding: 0px 10px;
+		&.size-1 {
+			width: 45px;
+			max-width: 45px;
+		}
 	}
 }
 .users-list-titles {

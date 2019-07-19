@@ -14,9 +14,10 @@ class ReportError extends Component {
       description: '',
       file: '',
       userId: this.props.cookies.get('login').id,
-      productId: this.props.match.params.id,
+      productId: this.props.match.params.productId,
       type: 'report'
     };
+    console.log(this.props);
   }
 
   componentDidMount() {

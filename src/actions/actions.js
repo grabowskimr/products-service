@@ -58,6 +58,22 @@ const apiActions = {
 				id
 			}
 		}
+	},
+	changeServiceStatus: (id) => {
+		return {
+			type: ACTION.CHANGE_SERVICE_STATUS,
+			payload: {
+				id
+			}
+		}
+	},
+	changeReportStatus: (id) => {
+		return {
+			type: ACTION.CHANGE_REPORT_STATUS,
+			payload: {
+				id
+			}
+		}
 	}
 
 }
@@ -98,6 +114,15 @@ export const showMessage = (message) => {
 export const hideMessage = () => {
 	return {
 		type: ACTION.HIDE_MESSAGE
+	}
+}
+
+export const setProfile = (profile) => {
+	return {
+		type: ACTION.SET_PROFILE,
+		payload: {
+			profile
+		}
 	}
 }
 

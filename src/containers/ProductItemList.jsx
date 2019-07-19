@@ -11,11 +11,18 @@ const ProductItemList = (props) => {
         <span>{product.vin}</span>
         <span>{product.order_date}</span>
         <span>{product.wariancy}</span>
-        <div className="item-actions">
-          <button data-product={product.id} onClick={props.orderService} disabled={product.status_reqular_fix === '1' ? true : false} className={product.status_reqular_fix === '1' ? 'submited' : ''}>{product.status_reqular_fix === '1' ? 'Serwis zamówiony' : 'Zamów serwis'}</button>
-          <Link to={`product/${product.id}/report`} disabled={product.status === '1' ? true : false} onClick={props.reportAnError} className={`button report-button ${product.status === '1' ? 'submited' : ''}`}>{product.status === '1' ? 'Usterka zgłoszona' : 'Zgłoś usterke'}</Link>
-          <Link to={`product/${product.id}`} className="button dark">Szczegóły</Link>
-        </div>
+        {props.isAdmin ? 
+          <div className="item-actions">
+            <button data-product={product.id} onClick={props.changeServiceStatus} disabled={product.status_reqular_fix === '0' ? true : false} className={product.status_reqular_fix === '0' ? 'submited' : ''}>{product.status_reqular_fix === '0' ? 'Brak serwisu' : 'Zmień status'}</button>
+            <button data-product={product.id} onClick={props.changeReportStatus} disabled={product.status === '0' ? true : false} className={product.status === '0' ? 'submited' : ''}>{product.status === '0' ? 'Brak usterki' : 'Zmień status usterki'}</button>
+            <Link to={`${props.userId}/product/${product.id}`} className="button dark">Szczegóły</Link>
+          </div> :
+          <div className="item-actions">
+            <button data-product={product.id} onClick={props.orderService} disabled={product.status_reqular_fix === '1' ? true : false} className={product.status_reqular_fix === '1' ? 'submited' : ''}>{product.status_reqular_fix === '1' ? 'Serwis zamówiony' : 'Zamów serwis'}</button>
+            <Link to={`product/${product.id}/report`} disabled={product.status === '1' ? true : false} onClick={props.reportAnError} className={`button report-button ${product.status === '1' ? 'submited' : ''}`}>{product.status === '1' ? 'Usterka zgłoszona' : 'Zgłoś usterke'}</Link>
+            <Link to={`product/${product.id}`} className="button dark">Szczegóły</Link>
+          </div>
+        }
       </div>
     </li>
   )

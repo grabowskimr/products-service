@@ -5,7 +5,7 @@ import { withCookies } from 'react-cookie';
 import Box from '../containers/Box';
 import List from '../containers/List';
 import ProductItemList from '../containers/ProductItemList';
-import { getUserProducts, setStatusService } from '../actions/apiCalls';
+import { getUserProducts, setStatusService, changeServiceStatus, changeReportStatus } from '../actions/apiCalls';
 
 class ProductList extends Component {
   constructor(props) {
@@ -17,7 +17,8 @@ class ProductList extends Component {
         {name: 'Data zakupu', flex: 1},
         {name: 'Gwarancja', flex: 1},
         {name: 'Akcje', flex: 2}
-      ]
+      ],
+      isAdmin: this.props.cookies.get('login').profile === 'admin' ? true : false
     }
   }
 
@@ -37,6 +38,30 @@ class ProductList extends Component {
     }
   }
 
+  changeServiceStatus = (e) => {
+    let confirmValue = window.confirm('Zmienić status?');
+    if(confirmValue) {
+      this.props.changeServiceStatus({
+        id: e.target.dataset.product,
+        userId: this.props.userId,
+        type: 'service',
+        status: 0
+      });
+    }
+  }
+
+  changeReportStatus = (e) => {
+    let confirmValue = window.confirm('Zmienić status?');
+    if(confirmValue) {
+      this.props.changeReportStatus({
+        id: e.target.dataset.product,
+        userId: this.props.userId,
+        type: 'report',
+        status: 0
+      });
+    }
+  }
+
   render() {
     return (
       <Box title="Lista produktów" list size={100}>
@@ -44,7 +69,15 @@ class ProductList extends Component {
         <List titles={this.state.titles} >
           {this.props.userProducts.map(product => {
             if(!product.hidden) {
-              return <ProductItemList key={product.id} product={product} orderService={this.orderService} />;
+              return <ProductItemList 
+                key={product.id} 
+                product={product} 
+                orderService={this.orderService} 
+                changeServiceStatus={this.changeServiceStatus} 
+                changeReportStatus={this.changeReportStatus}
+                userId={this.props.userId} 
+                isAdmin={this.state.isAdmin} 
+              />;
             }
           })}
         </List> : 
@@ -60,4 +93,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, {getUserProducts, setStatusService})(withCookies(ProductList));
+export default connect(mapStateToProps, {getUserProducts, setStatusService, changeServiceStatus, changeReportStatus})(withCookies(ProductList));

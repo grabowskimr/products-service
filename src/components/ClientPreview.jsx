@@ -5,7 +5,7 @@ import Client from './Client';
 class ClientPreview extends Component {
   render() {
     return (
-      <Client userId={this.props.match.params.id}/>
+      <Client userId={this.props.match.params.userId}/>
     )
   }
 }

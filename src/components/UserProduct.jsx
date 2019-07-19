@@ -25,14 +25,15 @@ class UserProduct extends Component {
         status_reqular_fix: '',
         vin: '',
         wariancy: ''
-      }
-    }
+      },
+      isAdmin: this.props.cookies.get('login').profile === 'admin' ? true : false
+    };
   }
 
   componentDidMount() {
     this.props.getProductInfo({
-      productId: this.props.match.params.id,
-      userId: this.props.cookies.get('login').id
+      productId: this.props.match.params.productId,
+      userId: this.state.isAdmin ? this.props.match.params.userId : this.props.cookies.get('login').id
     }).then((data) => {
       this.setState({
         history: data.history,

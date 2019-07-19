@@ -150,6 +150,28 @@ export const setStatusService = (service) => (dispatch) => {
 	});
 }
 
+export const changeServiceStatus = (service) => (dispatch) => {
+	dispatch(actions.showLoader());
+	return api.post('changeServiceStatus', service).then(({data}) => {
+		if(data.status) {
+			dispatch(actions.changeServiceStatus(service.id));
+		}
+		dispatch(showMessage(data));
+		dispatch(actions.hideLoader());
+	});
+}
+
+export const changeReportStatus = (service) => (dispatch) => {
+	dispatch(actions.showLoader());
+	return api.post('changeReportStatus', service).then(({data}) => {
+		if(data.status) {
+			dispatch(actions.changeReportStatus(service.id));
+		}
+		dispatch(showMessage(data));
+		dispatch(actions.hideLoader());
+	});
+}
+
 export const sendErrorReport = (errorData) => (dispatch) => {
 	errorData.date = new Date();
 	dispatch(actions.showLoader());
