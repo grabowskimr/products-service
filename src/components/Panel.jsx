@@ -13,6 +13,8 @@ import MainContent from '../containers/MainContent';
 import ReportError from '../components/ReportError';
 import HomeAdmin from './HomeAdmin';
 import ClientPreview from './ClientPreview';
+import Orders from './Orders';
+import Order from './Order';
 import { setUserId } from '../actions/actions';
 import { getInitialData } from '../actions/apiCalls';
 
@@ -62,6 +64,8 @@ class Panel extends Component {
 								<Route exact path={`${this.props.match.url}${this.state.isAdmin ? '/klient/:userId' : ''}/product/:productId`} component={UserProduct} />
 								<Route path={`${this.props.match.url}${this.state.isAdmin ? '/klient/:userId' : ''}/product/:productId/report`} component={ReportError} />
 								<Route exact path={`${this.props.match.url}/klient/:userId`} component={ClientPreview} />
+								<Route exact path={`${this.props.match.url}/orders`} component={Orders} />
+								<Route path={`${this.props.match.url}/orders/:id`} component={Order} />
 							</MainContent>
 						</PanelContent>
 				</div>}

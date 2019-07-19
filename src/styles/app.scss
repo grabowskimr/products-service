@@ -412,3 +412,84 @@ button,
 	background: $light;
 	padding: 15px 10px;
 }
+.acc-item {
+	display: block;
+	border-radius: 5px;
+	overflow: hidden;
+	margin-bottom: 10px;
+	.acc-item-title {
+		display: flex;
+		padding: 5px;
+		align-items: center;
+		background: $lightGrey;
+		transition: all .2s ease-in-out;
+		cursor: pointer;
+		&:hover {
+			background: $lightGrey;
+		}
+		& > span {
+			flex: 1;
+			pointer-events: none;
+		}
+		.button {
+			width: auto;
+			padding: 5px 10px;
+			font-size: 15px;
+			background: $red;
+			&:hover {
+				background: $redHover;
+			}
+		}
+	}
+	.acc-item-content {
+		transition: all .2s linear; 
+		max-height: 0px;
+		overflow: hidden;
+		opacity: 0;
+		border: 1px solid $lightGrey;
+		padding: 0px 10px;
+		&.show {
+			max-height: 500px;
+			padding: 10px;
+			opacity: 1;
+		}
+	}
+}
+.acc-item-content {
+	box-sizing: border-box;
+	padding: 10px;
+	display: flex;
+	.acc-information {
+		width: 100%;
+	}
+	.acc-row {
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+		.label {
+			max-width: 260px;
+			width: 100%;
+			margin: 5px;
+			min-width: 150px;
+		}
+		&.desc {
+			justify-content: flex-start;
+			.label {
+				max-width: 100%;
+				width: auto;
+				&:first-of-type {
+					margin-right: 10px;
+				}
+			}
+		}
+	}
+	.acc-item-image {
+		max-width: 400px;
+		margin-right: 10px;
+	}
+	.order-btn {
+    margin-top: 20px;
+    width: auto;
+    float: right;
+	}
+}

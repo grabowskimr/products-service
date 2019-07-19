@@ -17,7 +17,6 @@ class ReportError extends Component {
       productId: this.props.match.params.productId,
       type: 'report'
     };
-    console.log(this.props);
   }
 
   componentDidMount() {

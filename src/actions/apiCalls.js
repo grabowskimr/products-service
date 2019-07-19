@@ -120,6 +120,11 @@ export const getUserProducts = (id) => (dispatch) => {
 }
 
 export const addUserProduct = (data) => (dispatch) => {
+	let date = new Date(data.orderDate);
+	let year = date.getFullYear();
+	let month = date.getMonth();
+	let day = date.getDate();
+	data.wariancy = new Date(year + 1, month, day);
 	dispatch(actions.showLoader());
 	return api.post('addUserProduct', data).then(({data}) => {
 		dispatch(showMessage(data));
@@ -230,11 +235,40 @@ export const getProductInfo = (params) => (dispatch) => {
 	})
 }
 
-
 export const getUsers = () => (dispatch) => {
 	dispatch(actions.showLoader());
 	return api.get('getUsers').then(({data}) => {
 		dispatch(actions.hideLoader());
 		return data;
 	})
+}
+
+export const getOrders = () => (dispatch) => {
+	dispatch(actions.showLoader());
+	return api.get('getOrders').then(({data}) => {
+		dispatch(actions.hideLoader());
+		return data;
+	})
+}
+
+export const getOrder = (id) => (dispatch) => {
+	dispatch(actions.showLoader());
+	return api.get('getOrder', false, id).then(({data}) => {
+		dispatch(actions.hideLoader());
+		return data[0];
+	})
+}
+
+export const changeStatus = (serviceData) => (dispatch) => {
+	dispatch(actions.showLoader());
+	return api.post('changeStatus', serviceData).then(({data}) => {
+		if(data.status) {
+			dispatch(showMessage(data));
+			dispatch(actions.hideLoader());
+			return data;
+		} else {
+			dispatch(showMessage(data));
+			return data;
+		}
+	});
 }

@@ -4,13 +4,7 @@ import { withCookies } from 'react-cookie';
 
 import { getProductInfo } from '../actions/apiCalls';
 import Box from '../containers/Box';
-
-const Label = ({title, value}) => (
-  <div className="label">
-    <h3>{title}</h3>
-    <span>{value}</span>
-  </div>
-)
+import Label from '../containers/Label';
 
 class UserProduct extends Component {
   constructor(props) {
