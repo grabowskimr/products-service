@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Input from '../containers/Input';
 import Box from '../containers/Box';
 import { addUserProduct } from '../actions/apiCalls';
+import { host } from '../constants/config';
 
 class RegisterProduct extends Component {
   constructor(props) {
@@ -11,7 +12,13 @@ class RegisterProduct extends Component {
     this.state = {
       productId: '',
       vin: '',
-      orderDate: ''
+      orderDate: '',
+      selectedProduct: {
+        id: '',
+        name: '',
+        image: '',
+        properties: {}
+      }
     }
   }
 
@@ -30,6 +37,20 @@ class RegisterProduct extends Component {
       [name]: e.target.value
     })
   }
+
+  changeProduct = (e) => {
+    let selectedProduct = this.props.products.find((product) => product.id === e.target.value);
+    let name = e.target.name;
+    this.setState({
+      [name]: e.target.value,
+      selectedProduct: {
+        id: selectedProduct.id,
+        name: selectedProduct.name,
+        image: selectedProduct.image,
+        properties: JSON.parse(selectedProduct.properties)
+      }
+    })
+  }
   
   changeDate = (date) => {
     this.setState({
@@ -39,14 +60,27 @@ class RegisterProduct extends Component {
 
   render() {
     return (
-      <Box title="Zarejestruj produkt">
-        <form onSubmit={this.register}>
-          <Input type="select" placeholder="Produkt" label="Produkt" name="productId" options={this.props.products} value={this.state.productId} onChange={this.changeFormData} required/>
-          <Input type="date" label="Data zakupu" value={this.state.orderDate} onChange={this.changeDate} placeholder="Data" required />
-          <Input type="text" placeholder="Numer vin" label="Numer vin" name="vin" value={this.state.vin} onChange={this.changeFormData} required/>
-          <button type="submit">Dodaj</button>
-        </form>
-      </Box>
+      <div className="register-product">
+        <Box title="Zarejestruj produkt">
+          <form onSubmit={this.register}>
+            <Input type="select" placeholder="Produkt" label="Produkt" name="productId" options={this.props.products} value={this.state.productId} onChange={this.changeProduct} required/>
+            {this.state.selectedProduct && this.state.selectedProduct.image && <div>
+              <img src={`${host}/${this.state.selectedProduct.image}`} alt="product"/>
+            </div>}
+            <Input type="date" label="Data zakupu" value={this.state.orderDate} onChange={this.changeDate} placeholder="Data" required />
+            <Input type="text" placeholder="Numer vin" label="Numer vin" name="vin" value={this.state.vin} onChange={this.changeFormData} required/>
+            <button type="submit">Dodaj</button>
+          </form>
+        </Box>
+        {this.state.selectedProduct.name && <Box title="Dane">
+          {Object.keys(this.state.selectedProduct.properties).map(prop => (
+            <div className="product-prop" key={prop}>
+              <span className="input-name">{this.state.selectedProduct.properties[prop].name}</span>
+              <span className="input-value">{this.state.selectedProduct.properties[prop].value}</span>
+            </div>
+          ))}
+        </Box>}
+      </div>
     )
   }
 }

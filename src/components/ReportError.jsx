@@ -15,7 +15,8 @@ class ReportError extends Component {
       file: '',
       userId: this.props.cookies.get('login').id,
       productId: this.props.match.params.productId,
-      type: 'report'
+      type: 'report',
+      email: this.props.email
     };
   }
 
@@ -65,4 +66,10 @@ class ReportError extends Component {
   }
 }
 
-export default connect(null, {sendErrorReport, checkIfReportExist})(withCookies(ReportError));
+function mapStateToProps(state) {
+  return {
+    email: state.mainReducer.email
+  }
+}
+
+export default connect(mapStateToProps, {sendErrorReport, checkIfReportExist})(withCookies(ReportError));

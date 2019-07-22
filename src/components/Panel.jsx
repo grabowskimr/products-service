@@ -15,6 +15,9 @@ import HomeAdmin from './HomeAdmin';
 import ClientPreview from './ClientPreview';
 import Orders from './Orders';
 import Order from './Order';
+import AddProduct from './AddProduct';
+import Products from './Products';
+import Product from './Product';
 import { setUserId } from '../actions/actions';
 import { getInitialData } from '../actions/apiCalls';
 
@@ -23,8 +26,8 @@ class Panel extends Component {
 		super(props);
 		this.state = {
 			showPanel: false,
-			profile: this.props.cookies.get('login').profile,
-			isAdmin: this.props.cookies.get('login').profile === 'admin' ? true : false
+			profile: this.props.cookies.get('login') ? this.props.cookies.get('login').profile : '',
+			isAdmin: this.props.cookies.get('login') && this.props.cookies.get('login').profile === 'admin' ? true : false
 		}
 	}
 
@@ -66,6 +69,9 @@ class Panel extends Component {
 								<Route exact path={`${this.props.match.url}/klient/:userId`} component={ClientPreview} />
 								<Route exact path={`${this.props.match.url}/orders`} component={Orders} />
 								<Route path={`${this.props.match.url}/orders/:id`} component={Order} />
+								<Route path={`${this.props.match.url}/edit`} component={AddProduct} />
+								<Route exact path={`${this.props.match.url}/products`} component={Products} />
+								<Route exact path={`${this.props.match.url}/products/:id`} component={Product} />
 							</MainContent>
 						</PanelContent>
 				</div>}

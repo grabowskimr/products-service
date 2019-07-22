@@ -40,7 +40,11 @@ class Login extends Component {
 
 	register = (e) => {
 		e.preventDefault();
-		this.props.registerToApp(this.state.form);
+		this.props.registerToApp(this.state.form).then(() => {
+			this.setState({
+				showRegister: !this.state.showRegister
+			})
+		})
 	}
 
  	changeFormData = (e) => {

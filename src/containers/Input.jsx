@@ -8,8 +8,8 @@ const Input = (props) => {
 			{props.type === 'select' ? 
 				<select {...props}>
 					<option value="">Brak</option>
-					{props.options ? props.options.map((opt) => (
-						<option key={opt.id} value={opt.id}>{opt.name}</option>
+					{props.options ? props.options.map((opt, index) => (
+						<option key={index} value={opt.id}>{opt.name}</option>
 					)) : <option>None</option>}
 				</select> 
 				: props.type === 'textarea' ? 

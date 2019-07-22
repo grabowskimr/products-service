@@ -21,6 +21,8 @@ class Menu extends Component {
           <li><Link to={`${panelUrl}/${this.props.userId}/home`}>Home</Link></li>
           {this.state.isAdmin && <li><Link to={`${panelUrl}/${this.props.userId}/orders`}>Zgłoszenia</Link></li>}
           {!this.state.isAdmin && <li><Link to={`${panelUrl}/${this.props.userId}/register`}>Rejestruj urządzenie</Link></li>}
+          {this.state.isAdmin && <li><Link to={`${panelUrl}/${this.props.userId}/products`}>Produkty</Link></li>}
+          {this.state.isAdmin && <li><Link to={`${panelUrl}/${this.props.userId}/edit`}>Dodaj produkt</Link></li>}
         </ul>
       </div>
     )

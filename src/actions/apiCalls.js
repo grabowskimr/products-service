@@ -80,12 +80,12 @@ const getUserProductsData = (id) => {
 	})
 }
 
-
 export const registerToApp = (data) => (dispatch) => {
 	dispatch(actions.showLoader());
-	api.post('register', data, true).then(({data}) => {
+	return api.post('register', data, true).then(({data}) => {
 		dispatch(showMessage(data));
 		dispatch(actions.hideLoader());
+		return data;
 	})
 }
 
@@ -144,9 +144,11 @@ export const getInitialData = () => (dispatch) => {
 }
 
 export const setStatusService = (service) => (dispatch) => {
+	console.log(service);
 	service.date = new Date();
 	dispatch(actions.showLoader());
 	return api.post('setStatusService', service).then(({data}) => {
+		console.log(data);
 		if(data.status) {
 			dispatch(actions.setStatusService(service.id));
 		}
@@ -225,7 +227,7 @@ export const checkIfReportExist = (service) => (dispatch) => {
 export const getProductInfo = (params) => (dispatch) => {
 	dispatch(actions.showLoader());
 	return api.get('getProductHistory', false, params).then(response => {
-		return api.get('getProduct', false, params).then((product) => {
+		return api.get('getUserProduct', false, params).then((product) => {
 			dispatch(actions.hideLoader());
 			return {
 				product: product.data[0],
@@ -269,6 +271,81 @@ export const changeStatus = (serviceData) => (dispatch) => {
 		} else {
 			dispatch(showMessage(data));
 			return data;
+		}
+	});
+}
+
+export const addProduct = (productData) => (dispatch) => {
+	dispatch(actions.showLoader());
+	const formData = new FormData();
+	formData.append('image', productData.file);
+	const config = {
+		headers: {
+			'content-type': 'multipart/form-data'
+		}
+	}
+	if(!productData.file) {
+		return api.post('addProduct', productData).then(({data}) => {
+			dispatch(showMessage(data));
+			dispatch(actions.hideLoader());
+			return data;
+		});
+	}
+	return axios.post(`${host}/upload.php`, formData, config).then((response) => {
+		if(!response.data.status) {
+			dispatch(actions.hideLoader());
+			dispatch(showMessage(response.data));
+			return;
+		} else {
+			const filePath = response.data.message;
+			productData.file = filePath;
+			return api.post('addProduct', productData).then(({data}) => {
+				dispatch(showMessage(data));
+				dispatch(actions.hideLoader());
+				return data;
+			});
+		}
+	});
+}
+
+export const getProduct = (params) => (dispatch) => {
+	dispatch(actions.showLoader());
+		return api.get('getProduct', false, params).then((product) => {
+			dispatch(actions.hideLoader());
+			return product.data[0];
+		})
+}
+
+export const updateProduct = (productData) => (dispatch) => {
+	dispatch(actions.showLoader());
+	const formData = new FormData();
+	formData.append('image', productData.file);
+	const config = {
+		headers: {
+			'content-type': 'multipart/form-data'
+		}
+	}
+	if(!productData.file) {
+		productData.file = productData.image;
+		return api.post('updateProduct', productData).then(({data}) => {
+			dispatch(showMessage(data));
+			dispatch(actions.hideLoader());
+			return data;
+		});
+	}
+	return axios.post(`${host}/upload.php`, formData, config).then((response) => {
+		if(!response.data.status) {
+			dispatch(actions.hideLoader());
+			dispatch(showMessage(response.data));
+			return;
+		} else {
+			const filePath = response.data.message;
+			productData.file = filePath;
+			return api.post('updateProduct', productData).then(({data}) => {
+				dispatch(showMessage(data));
+				dispatch(actions.hideLoader());
+				return data;
+			});
 		}
 	});
 }
