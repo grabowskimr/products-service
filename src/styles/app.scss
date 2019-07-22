@@ -238,6 +238,7 @@ button,
 		img {
 			width: 100%;
 			margin-bottom: 10px;
+			min-width: 150px;
 		}
 	}
 	.box-title {
@@ -402,6 +403,7 @@ button,
 	color: $dark;
 	text-decoration: none;
 	transition: all .2s ease-in-out;
+	border-bottom: 1px solid $light;
 	&:hover {
 		background: $light;
 	}
@@ -526,7 +528,7 @@ button,
 }
 .register-product {
 	display: flex;
-	& > div:first-of-type {
+	& > div:first-of-type:not(:last-of-type) {
 		margin-right: 30px;
 	}
 	.product-prop {
@@ -563,4 +565,13 @@ button,
 			background: $redHover;
 		}
 	}
+}
+.hamburger {
+	display: none;
+}
+.users-list-titles span:nth-of-type(2),
+.user-link span:nth-of-type(2) {
+	width: 150px;
+	max-width: 180px;
+	min-width: 130px;
 }

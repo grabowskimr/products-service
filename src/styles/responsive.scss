@@ -1,0 +1,131 @@
+@media screen and (max-width: 1220px) {
+
+  .label {
+    margin: 0px 5px 10px 5px;
+  }
+
+}
+
+@media screen and (max-width: 980px) {
+
+  .hamburger {
+    font-size: 29px;
+    display: flex;
+    align-items: center;
+    margin-right: 50px;
+  }
+  .button-logout {
+    padding: 5px 10px;
+  }
+  .panel-content .sidebar {
+    transform: translateX(-100%);
+  }
+  .topbar {
+    padding: 10px 10px;
+  }
+  .panel-content .main {
+    margin-left: 0px;
+    padding: 30px 10px;
+  }
+  .register-product {
+    display: flex;
+    flex-direction: column;
+    & > div:first-of-type:not(:last-of-type) {
+      margin-right: 0px;
+      margin-bottom: 20px;
+    }
+  }
+  .acc-item-content .acc-row {
+    flex-wrap: wrap;
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+  .acc-item-id {
+    display: none;
+  }
+  .acc-item .acc-item-content.show {
+    max-height: 1900px;
+  }
+  .users-list-titles span:nth-of-type(2),
+  .user-link span:nth-of-type(2),
+  .users-list-titles span:nth-of-type(4),
+  .user-link span:nth-of-type(4) {
+    display: none;
+  }
+  .users-list-titles span:nth-of-type(3),
+  .user-link span:nth-of-type(3) {
+    width: 200px;
+    max-width: 200px;
+    min-width: 150px;
+  }
+  .list {
+    .title-li span:nth-of-type(3),
+    .title-li span:nth-of-type(5) {
+      display: none;
+    }
+    .product-item-list .product-item {
+      flex-wrap: wrap;
+      & > span:nth-of-type(2) {
+        display: none;
+      }
+      .item-actions {
+        width: 100%;
+        min-width: 100%;
+      }
+    }
+  }
+  .flex-container {
+    flex-wrap: wrap;
+    &.flex-4 > div {
+      flex: 1 1;
+      width: 100%;
+      min-width: 100%;
+    }
+  }
+  .history-item {
+    flex-direction: column;
+    border-bottom: 1px solid $darkGery;
+  }
+  .avatar-container {
+    display: none;
+  }
+
+}
+
+@media screen and (max-width: 540px) {
+
+  .notification {
+    padding: 15px 10px;
+    width: calc(100% - 40px);
+    transform: translateY(100px);
+  }
+
+  .acc-item-content {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .acc-row {
+      flex-wrap: nowrap;
+      flex-direction: column;
+    }
+  }
+  .acc-item .acc-item-title > span:nth-of-type(3) {
+    display: none;
+  }
+  .form-buttons-container {
+    align-items: center;
+    flex-direction: column;
+  }
+  .form-buttons-container button.add-prop {
+    margin: 0px 0px 10px;
+  }
+  .users-list-titles span:nth-of-type(1),
+  .user-link span:nth-of-type(1),
+  .users-list-titles span:nth-of-type(5),
+  .user-link span:nth-of-type(5) {
+    display: none;
+  }
+
+}

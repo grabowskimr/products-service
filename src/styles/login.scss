@@ -21,6 +21,9 @@
   .page-logo {
     text-align: center;
     margin-bottom: 30px;
+    img {
+      max-width: 100%;
+    }
   }
   .login-box {
     background: white;
@@ -28,6 +31,8 @@
     padding: 15px 20px;
     box-shadow: $boxShadow;
     border-radius: 5px;
+    max-width: 95%;
+    margin: 0 auto;
     button {
       width: 100%;
       padding: 10px;
