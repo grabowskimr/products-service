@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SidebarContainer = (props) => (
-  <aside className="sidebar">
+  <aside className={`sidebar ${props.show ? 'show' : ''}`}>
     {props.children}
   </aside>
 );

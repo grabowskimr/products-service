@@ -1,7 +1,7 @@
 import React from 'react';
 
 const MainContent = (props) => (
-  <div className="main">
+  <div className="main" onClick={props.hideSidebar}>
     {props.children}
   </div>
 );

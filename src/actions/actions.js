@@ -126,4 +126,16 @@ export const setProfile = (profile) => {
 	}
 }
 
+export const toggleSidebar = () => {
+	return {
+		type: ACTION.TOGGLE_SIDEBAR
+	}
+}
+
+export const hideSidebar = () => {
+	return {
+		type: ACTION.HIDE_SIDEBAR
+	}
+}
+
 export default apiActions;

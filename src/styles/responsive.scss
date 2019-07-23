@@ -19,6 +19,10 @@
   }
   .panel-content .sidebar {
     transform: translateX(-100%);
+    transition: all .2s ease-in-out;
+    &.show {
+      transform: translateX(0%);
+    }
   }
   .topbar {
     padding: 10px 10px;

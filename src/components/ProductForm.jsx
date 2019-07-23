@@ -85,7 +85,7 @@ class ProductForm extends Component {
         })}>
           <Input type="text" placeholder="Produkt" label="Produkt" name="name" value={this.state.name} onChange={this.changeFormData} required/>
           <Input type="file" label="Zdjecie" name="file" onChange={this.onChangeFile} />
-          {this.state.image && <img src={`${host}/${this.state.image}`} alt="product" />}
+          {this.state.image && <div className="product-img"><img src={`${host}/${this.state.image}`} alt="product" /></div>}
           {Object.keys(this.state.props).map(key => (
             <div className="product-input-prop" key={key}>
               <Input type="text" placeholder={this.state.props[key].name} label={this.state.props[key].name} name={key} value={this.state.props[key].value} onChange={this.updateProp} required/>            

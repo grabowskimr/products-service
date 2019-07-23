@@ -64,7 +64,7 @@ class RegisterProduct extends Component {
         <Box title="Zarejestruj produkt">
           <form onSubmit={this.register}>
             <Input type="select" placeholder="Produkt" label="Produkt" name="productId" options={this.props.products} value={this.state.productId} onChange={this.changeProduct} required/>
-            {this.state.selectedProduct && this.state.selectedProduct.image && <div>
+            {this.state.selectedProduct && this.state.selectedProduct.image && <div className="product-img">
               <img src={`${host}/${this.state.selectedProduct.image}`} alt="product"/>
             </div>}
             <Input type="date" label="Data zakupu" value={this.state.orderDate} onChange={this.changeDate} placeholder="Data" required />

@@ -120,7 +120,7 @@ button,
 	top: 0px;
 	left: 0px;
 	.logo {
-		max-width: 180px;
+		max-width: 173px;
 	}
 	.toolbar-contant {
 		display: flex;
@@ -235,9 +235,13 @@ button,
 	}
 	.box-content {
 		padding: 30px 20px;
+		.product-img {
+			img {
+				width: 100%;
+				margin-bottom: 10px;
+			}
+		}
 		img {
-			width: 100%;
-			margin-bottom: 10px;
 			min-width: 150px;
 		}
 	}

@@ -18,7 +18,7 @@ import Order from './Order';
 import AddProduct from './AddProduct';
 import Products from './Products';
 import Product from './Product';
-import { setUserId } from '../actions/actions';
+import { setUserId, hideSidebar } from '../actions/actions';
 import { getInitialData } from '../actions/apiCalls';
 
 class Panel extends Component {
@@ -58,10 +58,10 @@ class Panel extends Component {
 			<>
 				{this.state.showPanel &&
 					<div className="panel">
-						<Header />
+						<Header userId={this.props.cookies.get('login') && this.props.cookies.get('login').id} />
 						<PanelContent>
 							<Sidebar userId={this.props.cookies.get('login') && this.props.cookies.get('login').id} />
-							<MainContent>
+							<MainContent hideSidebar={this.props.hideSidebar}>
 								<Route path={`${this.props.match.url}/home`} component={this.state.profile === 'admin' ? HomeAdmin : Client} />
 								<Route path={`${this.props.match.url}/register`} component={RegisterProduct} />
 								<Route exact path={`${this.props.match.url}${this.state.isAdmin ? '/klient/:userId' : ''}/product/:productId`} component={UserProduct} />
@@ -82,4 +82,4 @@ class Panel extends Component {
 
 
 
-export default connect(null, {setUserId, getInitialData})(withCookies(Panel));
+export default connect(null, {setUserId, getInitialData, hideSidebar})(withCookies(Panel));

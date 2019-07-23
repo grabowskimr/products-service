@@ -14,7 +14,8 @@ const mainReducer = (state = {
 		status: 1,
 		message: 'Message'
 	},
-	isAdmin: false
+	isAdmin: false,
+	showSidebar: false
 }, action) => {
   switch (action.type) {
     case ACTION.LOGIN:
@@ -128,6 +129,16 @@ const mainReducer = (state = {
 				...state,
 				isAdmin: action.payload.profile === 'admin' ? true : false
 			}
+		case ACTION.TOGGLE_SIDEBAR:
+			return {
+				...state,
+				showSidebar: !state.showSidebar
+			}
+		case ACTION.HIDE_SIDEBAR:
+				return {
+					...state,
+					showSidebar: false
+				}
     default:
       return state;
   }
