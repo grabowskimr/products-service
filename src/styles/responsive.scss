@@ -3,6 +3,12 @@
   .label {
     margin: 0px 5px 10px 5px;
   }
+  .users-list-titles span:nth-of-type(5),
+  .user-link span:nth-of-type(5),
+  .users-list-titles span:nth-of-type(6),
+  .user-link span:nth-of-type(6) {
+    display: none;
+  }
 
 }
 
@@ -52,12 +58,7 @@
   .acc-item .acc-item-content.show {
     max-height: 1900px;
   }
-  .users-list-titles span:nth-of-type(2),
-  .user-link span:nth-of-type(2),
-  .users-list-titles span:nth-of-type(4),
-  .user-link span:nth-of-type(4) {
-    display: none;
-  }
+
   .users-list-titles span:nth-of-type(3),
   .user-link span:nth-of-type(3) {
     width: 200px;
@@ -127,8 +128,15 @@
   }
   .users-list-titles span:nth-of-type(1),
   .user-link span:nth-of-type(1),
+  .users-list-titles span:nth-of-type(3),
+  .user-link span:nth-of-type(3),
   .users-list-titles span:nth-of-type(5),
   .user-link span:nth-of-type(5) {
+    display: none;
+  }
+
+  .users-list-titles span:nth-of-type(7),
+  .user-link button {
     display: none;
   }
 

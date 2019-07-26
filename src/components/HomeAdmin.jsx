@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import Box from '../containers/Box.jsx';
 import Search from '../containers/Search';
-import { getUsers } from '../actions/apiCalls';
+import { getUsers, removeUser } from '../actions/apiCalls';
 
 class HomeAdmin extends Component {
   constructor(props){
@@ -39,6 +39,24 @@ class HomeAdmin extends Component {
     });
   }
 
+  remove = (e) => {
+    e.persist();
+    e.stopPropagation();
+    let confirmValue = window.confirm('Usunąć urzytkownika?');
+    if(confirmValue) {
+      this.props.removeUser({
+        id: e.target.dataset.id
+      }).then(data => {
+        if(data.status) {
+          let users = this.state.users.filter(user => user.id !== e.target.dataset.id);
+          this.setState({
+            users: users
+          })
+        }
+      })
+    }
+  }
+
   render() {
     return (
       <>
@@ -53,7 +71,8 @@ class HomeAdmin extends Component {
             <span>Telefon</span>
           </div>
           {this.state.users.map((user) => (
-            <Link to={`klient/${user.id}`} key={user.id} className={`user-link ${!user.hide ? 'show' : 'hide'}`}>
+            <div className="client-record" key={user.id}>
+            <Link to={`klient/${user.id}`} className={`user-link ${!user.hide ? 'show' : 'hide'}`}>
               <span className="size-1">{user.id}</span>
               <span>{user.login}</span>
               <span>{user.firstname} {user.lastname}</span>
@@ -61,6 +80,8 @@ class HomeAdmin extends Component {
               <span>{user.email}</span>
               <span>{user.tel}</span>
             </Link>
+            <button data-id={user.id} className="remove-client-btn" onClick={this.remove}>Usuń</button>
+            </div>
           ))}
         </Box>
       </>
@@ -68,4 +89,4 @@ class HomeAdmin extends Component {
   }
 }
 
-export default connect(null, {getUsers})(HomeAdmin);
+export default connect(null, {getUsers, removeUser})(HomeAdmin);

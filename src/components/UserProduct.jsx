@@ -47,7 +47,7 @@ class UserProduct extends Component {
           </div>
           <div>
             <Label title="Data zakupu:" value={this.state.product.order_date} />
-            <Label title="Gwarancja do:" value={this.state.product.order_date} />
+            <Label title="Gwarancja do:" value={this.state.product.wariancy} />
           </div>
           <div>
             <Label title="Zgłoszono serwis:" value={this.state.product.status_reqular_fix === '1' ? 'Tak' : 'Nie'} />

@@ -69,7 +69,7 @@ const mainReducer = (state = {
 			}
 		case ACTION.FILTER_USER_PRODUCTS:
 			let filteredProducts = state.userProducts.map(product => {
-				if(product.name.toUpperCase().includes(action.payload.phase.toUpperCase())) {
+				if(product.name.toUpperCase().includes(action.payload.phase.toUpperCase()) || product.vin.toUpperCase().includes(action.payload.phase.toUpperCase())) {
 					product.hidden = false;
 				} else {
 					product.hidden = true;

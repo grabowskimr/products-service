@@ -144,11 +144,9 @@ export const getInitialData = () => (dispatch) => {
 }
 
 export const setStatusService = (service) => (dispatch) => {
-	console.log(service);
 	service.date = new Date();
 	dispatch(actions.showLoader());
 	return api.post('setStatusService', service).then(({data}) => {
-		console.log(data);
 		if(data.status) {
 			dispatch(actions.setStatusService(service.id));
 		}
@@ -348,4 +346,13 @@ export const updateProduct = (productData) => (dispatch) => {
 			});
 		}
 	});
+}
+
+export const removeUser = (data) => (dispatch) => {
+	dispatch(actions.showLoader());
+	return api.post('removeUser', data).then(({data}) => {
+		dispatch(showMessage(data));
+		dispatch(actions.hideLoader());
+		return data;
+	})
 }

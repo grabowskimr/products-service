@@ -15,7 +15,7 @@ class Client extends Component {
     return (
       <>
         {this.props.children}
-        <Search filterMethod={this.search}/>
+        <Search filterMethod={this.search} placeholder="Szukaj: Nazwa, VIN"/>
         <ProductList userId={this.props.userId}/>
       </>
     );
