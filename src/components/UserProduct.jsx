@@ -54,7 +54,7 @@ class UserProduct extends Component {
             <Label title="Zgłoszono usterkę:" value={this.state.product.status === '1' ? 'Tak' : 'Nie'} />
           </div>
           <div>
-            <Label title="Numer VIN:" value={this.state.product.vin} />
+            <Label title="Numer fabryczny urządzenia:" value={this.state.product.vin} />
           </div>
         </div>
       </Box>

@@ -13,7 +13,7 @@ class ProductList extends Component {
     this.state = {
       titles: [
         {name: 'Nazwa', flex: 1},
-        {name: 'VIN', flex: 1},
+        {name: 'Numer fabryczny urządzenia', flex: 1},
         {name: 'Data zakupu', flex: 1},
         {name: 'Gwarancja', flex: 1},
         {name: 'Akcje', flex: 2}

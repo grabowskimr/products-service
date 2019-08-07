@@ -29,7 +29,7 @@ const OrderDetails = (props) => {
           <Label title="Gwarancja do" value={item.wariancy}/>
         </div>
         <div className="acc-row">
-          <Label title="Numer VIN" value={item.vin}/>
+          <Label title="Numer fabryczny urządzenia" value={item.vin}/>
           <Label title="ID Użytkownika" value={item.user_id}/>
           <Label title="ID Produktu" value={item.product_id}/>
           <Label title="Login" value={item.login}/>

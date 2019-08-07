@@ -20,7 +20,7 @@ class Menu extends Component {
     return (
       <div className="menu">
         <ul className="menu-list">
-          <li onClick={this.props.toggleSidebar}><Link to={`${panelUrl}/${this.props.userId}/home`}>Home</Link></li>
+          <li onClick={this.props.toggleSidebar}><Link to={`${panelUrl}/${this.props.userId}/home`}>Strona główna</Link></li>
           {this.state.isAdmin && <li onClick={this.props.toggleSidebar}><Link to={`${panelUrl}/${this.props.userId}/orders`}>Zgłoszenia</Link></li>}
           {!this.state.isAdmin && <li onClick={this.props.toggleSidebar}><Link to={`${panelUrl}/${this.props.userId}/register`}>Rejestruj urządzenie</Link></li>}
           {this.state.isAdmin && <li onClick={this.props.toggleSidebar}><Link to={`${panelUrl}/${this.props.userId}/products`}>Produkty</Link></li>}

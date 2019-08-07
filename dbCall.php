@@ -11,11 +11,6 @@ function sendMessage($message, $status) {
 
 $_POST = json_decode(file_get_contents('php://input'), true);
 
-// $servername = "logikonemp2019.mysql.db";
-// $username = "logikonemp2019";
-// $password = "6xeWNez33Eor8Ay5TjEL";
-// $dbmane = "logikonemp2019";
-
 $servername = "localhost";
 $username = "root";
 $password = "root";
@@ -50,6 +45,7 @@ if (isset($_POST["register"])) {
 	$lastname = $_POST['lastname'];
 	$company = $_POST['company'];
 	$address = $_POST['address'];
+	$postcode = $_POST['postcode'];	
 	$tel = $_POST['tel'];
 
 	$sql = "SELECT * from USER where login = '$login';";
@@ -63,7 +59,7 @@ if (isset($_POST["register"])) {
 		return;
 	}
 	
-	$sql2 = "INSERT INTO USER (login, password, email, firstname, lastname, company, address, tel) VALUES ('$login', '$password', '$email', '$firstname', '$lastname', '$company', '$address', '$tel');";
+	$sql2 = "INSERT INTO USER (login, password, email, firstname, lastname, company, address, postcode, tel) VALUES ('$login', '$password', '$email', '$firstname', '$lastname', '$company', '$address', '$postcode', '$tel');";
 	$result2 = $conn->query($sql2);
 	sendMessage('Użytkownik zarejestrowany', 1);
 }
@@ -120,7 +116,7 @@ if (isset($_POST["addUserProduct"])) {
 	$orderDate = $_POST['orderDate'];
 	$vin = $_POST['vin'];
 	$wariancy = $_POST['wariancy'];
-	$sql = "INSERT INTO USER_PRODUCTS (product_id, user_id, vin, order_date, status, wariancy) VALUES ('$productId', $userId, $vin, '$orderDate', 0, '$wariancy')";
+	$sql = "INSERT INTO USER_PRODUCTS (product_id, user_id, vin, order_date, status, wariancy) VALUES ('$productId', $userId, '$vin', '$orderDate', 0, '$wariancy')";
 	$result = $conn->query($sql);
 	if($result) {
 		sendMessage('Dodano produkt', 1);
@@ -159,7 +155,7 @@ if (isset($_POST["setStatusService"])) {
 		$sql = "INSERT INTO SERVICE (product_id, user_id, type, status, date) VALUES ($id, $userId, '$type', $status, '$date')";
 		$result2 = $conn->query($sql);
 		if($result2) {
-			$user = "SELECT email FROM USER WHERE id = $userId";
+			$user = "SELECT email, login, company, tel, address FROM USER WHERE id = $userId";
 			$ruser = $conn->query($user);
 			$outLista = [];
 			while($row = mysqli_fetch_assoc($ruser)) {
@@ -167,10 +163,13 @@ if (isset($_POST["setStatusService"])) {
 			}
 
 			$email_from = "serwis@logikon.eu";
-			$email_to = "patzaw1992@gmail.com";
+			$email_to = "mail@mail.pl";
 			$email_subject = "Serwis";
 			
 			$userMail = $outLista[0]['email'];
+			$login = $outLista[0]['login'];
+			$company = $outLista[0]['company'];
+			$tel = $outLista[0]['tel'];
 			$wiadomosc = "Zgłoszono serwis";
 		
 			function clean_string( $string ) {
@@ -182,6 +181,9 @@ if (isset($_POST["setStatusService"])) {
 		
 			$email_message = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/strict.dtd"><html><head> <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/> <title>Wiadomość</title> <style>@media only screen and (max-width: 300px){body{width: 218px !important; margin: auto !important;}thead, tbody{width: 100%}.table{width: 195px !important; margin: auto !important;}.logo, .titleblock, .linkbelow, .box, .footer, .space_footer{width: auto !important; display: block !important;}span.title{font-size: 20px !important; line-height: 23px !important}span.subtitle{font-size: 14px !important; line-height: 18px !important; padding-top: 10px !important; display: block !important;}td.box p{font-size: 12px !important; font-weight: bold !important;}.table-recap table, .table-recap thead, .table-recap tbody, .table-recap th, .table-recap td, .table-recap tr{display: block !important;}.table-recap{width: 200px!important;}.table-recap tr td, .conf_body td{text-align: center !important;}.address{display: block !important; margin-bottom: 10px !important;}.space_address{display: none !important;}}@media only screen and (min-width: 301px) and (max-width: 500px){body{width: 425px!important; margin: auto!important;}thead, tbody{width: 100%}.table{margin: auto!important;}.logo, .titleblock, .linkbelow, .box, .footer, .space_footer{width: auto!important; display: block!important;}.table-recap{width: 295px !important;}.table-recap tr td, .conf_body td{text-align: center !important;}.table-recap tr th{font-size: 10px !important}}@media only screen and (min-width: 501px) and (max-width: 768px){body{width: 478px!important; margin: auto!important;}thead, tbody{width: 100%}.table{margin: auto!important;}.logo, .titleblock, .linkbelow, .box, .footer, .space_footer{width: auto!important; display: block!important;}}@media only screen and (max-device-width: 480px){body{width: 340px!important; margin: auto!important;}thead, tbody{width: 100%}.table{margin: auto!important;}.logo, .titleblock, .linkbelow, .box, .footer, .space_footer{width: auto!important; display: block!important;}.table-recap{width: 295px!important;}.table-recap tr td, .conf_body td{text-align: center!important;}.address{display: block !important; margin-bottom: 10px !important;}.space_address{display: none !important;}}</style></head><body style="-webkit-text-size-adjust:none;background-color:#fff;width:650px;font-family:Open-sans, sans-serif;color:#555454;font-size:13px;line-height:18px;margin:auto"> <table class="table table-mail" style="width:100%;margin-top:10px;-moz-box-shadow:0 0 5px #afafaf;-webkit-box-shadow:0 0 5px #afafaf;-o-box-shadow:0 0 5px #afafaf;box-shadow:0 0 5px #afafaf;filter:progid:DXImageTransform.Microsoft.Shadow(color=#afafaf,Direction=134,Strength=5)"> <tr> <td class="space" style="width:20px;padding:7px 0">&nbsp;</td><td align="center" style="padding:7px 0"> <table class="table" bgcolor="#ffffff" style="width:100%"> <tr> <td align="center" class="titleblock" style="padding:7px 0"> <font size="2" face="Open-sans, sans-serif" color="#555454"> <span class="title" style="font-weight:500;font-size:28px;text-transform:uppercase;line-height:33px">Wiadomość</span> <br/> </font> </td></tr><tr> <td class="space_footer" style="padding:0!important">&nbsp;</td></tr><tr> <td class="box" style="border:1px solid #D6D4D4;background-color:#f8f8f8;padding:7px 0"> <table class="table" style="width:100%"> <tr> <td width="10" style="padding:7px 0">&nbsp;</td><td style="padding:7px 0"> <font size="2" face="Open-sans, sans-serif" color="#555454"> <p data-html-only="1" style="border-bottom:1px solid #D6D4D4;margin:3px 0 7px;text-transform:uppercase;font-weight:500;font-size:18px;padding-bottom:10px"> Treść wiadomości: </p><table>';
 			$email_message .='<tr><td style="font-weight: 600; padding-right: 20px;">Email:</td><td>'.$userMail.'</td></tr>';
+			$email_message .='<tr><td style="font-weight: 600; padding-right: 20px;">Login:</td><td>'.$login.'</td></tr>';
+			$email_message .='<tr><td style="font-weight: 600; padding-right: 20px;">Firma:</td><td>'.$company.'</td></tr>';
+			$email_message .='<tr><td style="font-weight: 600; padding-right: 20px;">Telefon:</td><td>'.$tel.'</td></tr>';
 			$email_message .='<tr><td style="font-weight: 600; padding-right: 20px;">Wiadomość:</td><td>'.$wiadomosc.'</td></tr>';
 			$email_message .='</table></font> </td><td width="10" style="padding:7px 0">&nbsp;</td></tr></table> </td></tr></table> </td><td class="space" style="width:20px;padding:7px 0">&nbsp;</td></tr></table></body></html>';
 		
@@ -290,7 +292,7 @@ if (isset($_POST["saveErrorData"])) {
 			}
 
 			$email_from = "serwis@logikon.eu";
-			$email_to = "patzaw1992@gmail.com";
+			$email_to = "mail@mail.pl";
 			$email_subject = "Serwis";
 			
 			$userMail = $outLista[0]['email'];

@@ -28,7 +28,9 @@ class RegisterProduct extends Component {
       ...this.state,
       userId: this.props.userId
     };
-    this.props.addUserProduct(data);
+    this.props.addUserProduct(data).then(() => {
+      this.props.history.push(`/panel/${this.props.userId}/home`);
+    });
   }
 
   changeFormData = (e) => {
@@ -68,7 +70,7 @@ class RegisterProduct extends Component {
               <img src={`${host}/${this.state.selectedProduct.image}`} alt="product"/>
             </div>}
             <Input type="date" label="Data zakupu" value={this.state.orderDate} onChange={this.changeDate} placeholder="Data" required />
-            <Input type="text" placeholder="Numer vin" label="Numer vin" name="vin" value={this.state.vin} onChange={this.changeFormData} required/>
+            <Input type="text" placeholder="Numer fabryczny urządzenia" label="Numer fabryczny urządzenia" name="vin" required value={this.state.vin} onChange={this.changeFormData} required/>
             <button type="submit">Dodaj</button>
           </form>
         </Box>
