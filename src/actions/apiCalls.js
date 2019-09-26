@@ -356,3 +356,29 @@ export const removeUser = (data) => (dispatch) => {
 		return data;
 	})
 }
+
+export const addResetHash = (data) => (dispatch) => {
+	dispatch(actions.showLoader());
+	return api.post('addResetHash', data, true).then(({data}) => {
+		dispatch(showMessage(data));
+		dispatch(actions.hideLoader());
+		return data;
+	})
+}
+
+export const resetPassword = (data) => (dispatch) => {
+	dispatch(actions.showLoader());
+	return api.post('resetPassword', data, true).then(({data}) => {
+		dispatch(showMessage(data));
+		dispatch(actions.hideLoader());
+		return data;
+	})
+}
+
+export const hashChecking = (params) => (dispatch) => {
+	dispatch(actions.showLoader());
+		return api.get('hashChecking', true, params).then((data) => {
+			dispatch(actions.hideLoader());
+			return data.data[0];
+		})
+}

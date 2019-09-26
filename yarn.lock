@@ -4289,6 +4289,11 @@ from2@^2.1.0:
     inherits "^2.0.1"
     readable-stream "^2.0.0"
 
+front-md5@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/front-md5/-/front-md5-1.0.0.tgz#98bccc14fcfe4225718e45f81cda0ed27524cfd6"
+  integrity sha1-mLzMFPz+QiVxjkX4HNoO0nUkz9Y=
+
 fs-extra@7.0.1, fs-extra@^7.0.0:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-7.0.1.tgz#4f189c44aa123b895f722804f55ea23eadc348e9"

@@ -484,3 +484,15 @@ if (isset($_POST["removeUser"])) {
 		sendMessage('Wystąpił błąd', 0);
 	}
 }
+
+if (isset($_POST["addResetHash"])) {
+	$hash = $_POST['hash'];
+	$mail = $_POST['mail'];
+	$sql = "INSERT INTO RESET (hash, mail) VALUES ('$hash', '$mail')";
+	$result = $conn->query($sql);
+	if($result) {
+		sendMessage('Powodzenie', 1);
+	} else {
+		sendMessage('Wystąpił błąd', 0);
+	}
+}

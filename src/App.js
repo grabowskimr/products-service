@@ -9,6 +9,7 @@ import Login from './components/Login';
 import Panel from './components/Panel';
 import Loader from './containers/Loader';
 import Notification from './containers/Notification';
+import Reset from './components/Reset';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Router>
             <Switch>
               <Route exact path="/" component={Login} />
+              <Route exact path="/reset" component={Reset} />
               <Route path="/panel/:userId"  component={Panel} />
             </Switch>
           </Router>

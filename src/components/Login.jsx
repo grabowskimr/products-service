@@ -1,17 +1,19 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { withCookies } from 'react-cookie';
+import { hexMd5 } from 'front-md5';
 
 import LoginContainer from "../containers/LoginContainer";
 import Input from '../containers/Input';
 import { clearLoginError, setProfile } from '../actions/actions';
-import { registerToApp, loginToApp } from '../actions/apiCalls';
+import { registerToApp, loginToApp, addResetHash } from '../actions/apiCalls';
 
 class Login extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			showRegister: false,
+			togglePasswordReset: false,
 			form: {
 				login: '',
 				password: '',
@@ -65,11 +67,26 @@ class Login extends Component {
 		});
 	}
 	
+	toggleResetPassword = () => {
+		this.setState({
+			togglePasswordReset: !this.state.togglePasswordReset
+		})
+	}
+
+	resetPassword = (e) => {
+		e.preventDefault();
+		const time = new Date().getTime();
+		const result = hexMd5(`${this.state.form.email}${time}`);
+		this.props.addResetHash({
+			hash: result,
+			mail: this.state.form.email
+		});
+	}
 
   render() {
     return (
-			<LoginContainer onShowRegister={this.onShowRegister} showRegister={this.state.showRegister}>
-			{!this.state.showRegister ? 
+			<LoginContainer onShowRegister={this.onShowRegister} showRegister={this.state.showRegister} toggleResetPassword={this.toggleResetPassword} togglePasswordReset={this.state.togglePasswordReset}>
+			{!this.state.showRegister && !this.state.togglePasswordReset ? 
 				<form onSubmit={this.login}>
 					<h2>Zaloguj się</h2>
 					{this.props.loginError.length ? <span className="error">{this.props.loginError}</span> : null}
@@ -77,7 +94,7 @@ class Login extends Component {
 					<Input type="password" placeholder="Hasło" label="Hasło" name="password" value={this.state.form.password} onChange={this.changeFormData}/>
 					<button type="submit">Zaloguj się</button>
 				</form>
-			:
+			: !this.state.togglePasswordReset &&
 				<form onSubmit={this.register}>
 					<h2>Zarejestruj się</h2>
 					{this.props.loginError.length ? <span className="error">{this.props.loginError}</span> : null}					
@@ -92,6 +109,12 @@ class Login extends Component {
 					<Input type="text" placeholder="Telefon" label="Telefon" name="tel" value={this.state.form.tel} onChange={this.changeFormData}/>
 					<button type="submit">Zarejestruj się</button>
 				</form>}
+				{this.state.togglePasswordReset ? <form onSubmit={this.resetPassword}>
+					<h2>Podaj adres e-mail</h2>
+					<p>Na podany adres zostanie wysłany link resetujący hasło.</p>
+					<Input type="email" placeholder="E-mail" label="Email" name="email" value={this.state.form.email} onChange={this.changeFormData}/>
+					<button type="submit">Resetuj hasło</button>
+				</form> : null}
 		</LoginContainer>
     );
   }
@@ -104,4 +127,4 @@ function mapStateToProps(state) {
 	}
 }
 
-export default connect(mapStateToProps, {registerToApp, loginToApp, clearLoginError, setProfile})(withCookies(Login));
+export default connect(mapStateToProps, {registerToApp, loginToApp, clearLoginError, setProfile, addResetHash})(withCookies(Login));
