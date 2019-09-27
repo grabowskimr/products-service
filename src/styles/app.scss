@@ -450,7 +450,9 @@ button,
 		}
 		& > span {
 			flex: 1;
-			pointer-events: none;
+			&:not(.with-events) {
+				pointer-events: none;
+			}
 		}
 		.button {
 			width: auto;

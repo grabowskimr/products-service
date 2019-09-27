@@ -98,15 +98,15 @@ class Login extends Component {
 				<form onSubmit={this.register}>
 					<h2>Zarejestruj się</h2>
 					{this.props.loginError.length ? <span className="error">{this.props.loginError}</span> : null}					
-					<Input type="text" placeholder="Login" label="Login" name="login" value={this.state.form.login} onChange={this.changeFormData}/>
-					<Input type="password" placeholder="Hasło" label="Hasło" name="password" value={this.state.form.password} onChange={this.changeFormData}/>
-					<Input type="email" placeholder="E-mail" label="Email" name="email" value={this.state.form.email} onChange={this.changeFormData}/>
-					<Input type="text" placeholder="Imię" label="Imię" name="firstname" value={this.state.form.firstname} onChange={this.changeFormData}/>
-					<Input type="text" placeholder="Nazwisko" label="Nazwisko" name="lastname" value={this.state.form.lastname} onChange={this.changeFormData}/>
-					<Input type="text" placeholder="Firma" label="Firma" name="company" value={this.state.form.company} onChange={this.changeFormData}/>
-					<Input type="text" placeholder="Adres" label="Adres" name="address" value={this.state.form.address} onChange={this.changeFormData}/>
-					<Input type="text" placeholder="Kod Pocztowy" label="Kod pocztywy" name="postcode" value={this.state.form.postcode} onChange={this.changeFormData}/>
-					<Input type="text" placeholder="Telefon" label="Telefon" name="tel" value={this.state.form.tel} onChange={this.changeFormData}/>
+					<Input type="text" required placeholder="Login" label="Login" name="login" value={this.state.form.login} onChange={this.changeFormData}/>
+					<Input type="password" required placeholder="Hasło" label="Hasło" name="password" value={this.state.form.password} onChange={this.changeFormData}/>
+					<Input type="email" required placeholder="E-mail" label="Email" name="email" value={this.state.form.email} onChange={this.changeFormData}/>
+					<Input type="text" required placeholder="Imię" label="Imię" name="firstname" value={this.state.form.firstname} onChange={this.changeFormData}/>
+					<Input type="text" required placeholder="Nazwisko" label="Nazwisko" name="lastname" value={this.state.form.lastname} onChange={this.changeFormData}/>
+					<Input type="text" required placeholder="Firma" label="Firma" name="company" value={this.state.form.company} onChange={this.changeFormData}/>
+					<Input type="text" required placeholder="Adres" label="Adres" name="address" value={this.state.form.address} onChange={this.changeFormData}/>
+					<Input type="text" required placeholder="Kod Pocztowy" label="Kod pocztywy" name="postcode" value={this.state.form.postcode} onChange={this.changeFormData}/>
+					<Input type="text" required placeholder="Telefon" label="Telefon" name="tel" value={this.state.form.tel} onChange={this.changeFormData}/>
 					<button type="submit">Zarejestruj się</button>
 				</form>}
 				{this.state.togglePasswordReset ? <form onSubmit={this.resetPassword}>

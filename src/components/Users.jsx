@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { withCookies } from 'react-cookie';
 
 import Box from '../containers/Box.jsx';
 import Search from '../containers/Search';
-import { getClients, removeUser } from '../actions/apiCalls';
+import { getUsers, removeUser } from '../actions/apiCalls';
 
-class HomeAdmin extends Component {
+class Users extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -15,7 +16,10 @@ class HomeAdmin extends Component {
   }
 
   componentDidMount() {
-    this.props.getClients().then((users) => {
+    if(this.props.cookies.get('login').profile !== 'admin') {
+      this.props.history.push(`/panel/${this.props.cookies.get('login').id}/home`);
+    }
+    this.props.getUsers().then((users) => {
       this.setState({
         users: users
       })
@@ -60,26 +64,26 @@ class HomeAdmin extends Component {
   render() {
     return (
       <>
-        <Search filterMethod={this.search} placeholder="Szukaj: id, login, nazwisko, firma" />
-        <Box title="Klienci" list size={100}>
+        <Search filterMethod={this.search} placeholder="Szukaj: id, login, nazwisko" />
+        <Box title="Pracownicy" list size={100}>
           <div className="users-list-titles">
             <span className="size-1">Id</span>
             <span>Login</span>
             <span>Imie i nazwisko</span>
-            <span>Firma</span>
             <span>E-mail</span>
             <span>Telefon</span>
+            <span>Typ</span>
           </div>
           {this.state.users.map((user) => (
             <div className="client-record" key={user.id}>
-            <Link to={`klient/${user.id}`} className={`user-link ${!user.hide ? 'show' : 'hide'}`}>
+            <span className="user-link">
               <span className="size-1">{user.id}</span>
               <span>{user.login}</span>
               <span>{user.firstname} {user.lastname}</span>
-              <span>{user.company}</span>
               <span>{user.email}</span>
               <span>{user.tel}</span>
-            </Link>
+              <span>{user.profile === 'service' ? 'Serwisant' : 'Kordynator'}</span>
+            </span>
             <button data-id={user.id} className="remove-client-btn" onClick={this.remove}>Usuń</button>
             </div>
           ))}
@@ -89,4 +93,4 @@ class HomeAdmin extends Component {
   }
 }
 
-export default connect(null, {getClients, removeUser})(HomeAdmin);
+export default connect(null, {getUsers, removeUser})(withCookies(Users));

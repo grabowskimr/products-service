@@ -243,6 +243,14 @@ export const getUsers = () => (dispatch) => {
 	})
 }
 
+export const getClients = () => (dispatch) => {
+	dispatch(actions.showLoader());
+	return api.get('getClients').then(({data}) => {
+		dispatch(actions.hideLoader());
+		return data;
+	})
+}
+
 export const getOrders = () => (dispatch) => {
 	dispatch(actions.showLoader());
 	return api.get('getOrders').then(({data}) => {
@@ -381,4 +389,21 @@ export const hashChecking = (params) => (dispatch) => {
 			dispatch(actions.hideLoader());
 			return data.data[0];
 		})
+}
+export const addUser = (data) => (dispatch) => {
+	dispatch(actions.showLoader());
+	return api.post('addUser', data, false).then(({data}) => {
+		dispatch(showMessage(data));
+		dispatch(actions.hideLoader());
+		return data;
+	})
+}
+
+export const changeServiceUser = (data) => (dispatch) => {
+	dispatch(actions.showLoader());
+	return api.post('changeServiceUser', data, false).then(({data}) => {
+		dispatch(showMessage(data));
+		dispatch(actions.hideLoader());
+		return data;
+	})
 }

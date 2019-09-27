@@ -70,7 +70,7 @@ class RegisterProduct extends Component {
               <img src={`${host}/${this.state.selectedProduct.image}`} alt="product"/>
             </div>}
             <Input type="date" label="Data zakupu" value={this.state.orderDate} onChange={this.changeDate} placeholder="Data" required />
-            <Input type="text" placeholder="Numer fabryczny urządzenia" label="Numer fabryczny urządzenia" name="vin" required value={this.state.vin} onChange={this.changeFormData} required/>
+            <Input type="text" placeholder="Numer fabryczny urządzenia" label="Numer fabryczny urządzenia" name="vin" value={this.state.vin} onChange={this.changeFormData} required/>
             <button type="submit">Dodaj</button>
           </form>
         </Box>
