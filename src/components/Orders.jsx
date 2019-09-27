@@ -18,8 +18,9 @@ class Orders extends Component {
 
   componentDidMount() {
     this.props.getOrders().then((data) => {
+      let filteredData = data.filter(order => order.service_id === this.props.cookies.get('login').id);
       this.setState({
-        orders: data
+        orders: this.state.isService ? filteredData : data
       })
     });
     this.props.getUsers().then((data) => {

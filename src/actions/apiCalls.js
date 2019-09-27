@@ -407,3 +407,11 @@ export const changeServiceUser = (data) => (dispatch) => {
 		return data;
 	})
 }
+
+export const getServiceUser = (params) => (dispatch) => {
+	dispatch(actions.showLoader());
+	return api.get('getServiceUser', false, params).then(({data}) => {
+		dispatch(actions.hideLoader());
+		return data;
+	})
+}

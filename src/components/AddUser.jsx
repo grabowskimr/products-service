@@ -39,7 +39,9 @@ class AddUser extends Component {
 
   addUser = (e) => {
     e.preventDefault();
-    this.props.addUser(this.state);
+    this.props.addUser(this.state).then(() => {
+      this.props.history.push(`/panel/${this.props.cookies.get('login').id}/users`);
+    })
   }
 
   render() {

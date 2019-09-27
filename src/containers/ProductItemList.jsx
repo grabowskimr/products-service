@@ -18,8 +18,8 @@ const ProductItemList = (props) => {
             <Link to={`${props.userId}/product/${product.id}`} className="button dark">Szczegóły</Link>
           </div> :
           <div className="item-actions">
-            <button data-product={product.id} onClick={props.orderService} disabled={product.status_reqular_fix === '1' ? true : false} className={product.status_reqular_fix === '1' ? 'submited' : ''}>{product.status_reqular_fix === '1' ? 'Serwis zamówiony' : 'Zamów serwis grawancyjny'}</button>
-            <Link to={`product/${product.id}/report`} disabled={product.status === '1' ? true : false} onClick={props.reportAnError} className={`button report-button ${product.status === '1' ? 'submited' : ''}`}>{product.status === '1' ? 'Usterka zgłoszona' : 'Zgłoś usterke'}</Link>
+            <Link to={`product/${product.id}/service`} disabled={product.status_reqular_fix === '1' ? true : false} className={`button report-button ${product.status_reqular_fix === '1' ? 'submited' : ''}`}>{product.status_reqular_fix === '1' ? 'Serwis zamówiony' : 'Zamów serwis grawancyjny'}</Link>
+            <Link to={`product/${product.id}/report`} disabled={product.status === '1' ? true : false} className={`button report-button ${product.status === '1' ? 'submited' : ''}`}>{product.status === '1' ? 'Usterka zgłoszona' : 'Zgłoś usterke'}</Link>
             <Link to={`product/${product.id}`} className="button dark">Szczegóły</Link>
           </div>
         }

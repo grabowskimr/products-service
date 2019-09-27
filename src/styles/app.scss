@@ -24,6 +24,14 @@ button,
 	text-decoration: none;
 	text-align: center;
 	line-height: normal;
+	&.more-info-btn {
+    display: block;
+    width: 100px;
+    padding: 5px;
+    height: 29px;
+    margin-top: 7px;
+    font-size: 16px;
+	}
 	&:hover {
 		background: $greenHover;
 	}
@@ -42,8 +50,17 @@ button,
 		}
 	}
 }
+.more-info-btn {
+	max-width: 100px;
+	box-sizing: border-box;
+	margin-right: 5px;
+}
 .app {
 	min-height: 100vh;
+}
+.actions-column {
+	width: 100px;
+	max-width: 100px;
 }
 .input-container {
 	display: flex;
@@ -494,6 +511,10 @@ button,
 			width: 100%;
 			margin: 5px;
 			min-width: 150px;
+			&.full {
+				max-width: 100%;
+				box-sizing: border-box;
+			}
 		}
 		&.desc {
 			justify-content: flex-start;

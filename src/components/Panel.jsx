@@ -20,6 +20,7 @@ import Products from './Products';
 import Product from './Product';
 import Users from './Users';
 import AddUser from './AddUser';
+import ReportService from './ReportService';
 import { setUserId, hideSidebar } from '../actions/actions';
 import { getInitialData } from '../actions/apiCalls';
 
@@ -73,6 +74,7 @@ class Panel extends Component {
 								<Route path={`${this.props.match.url}/register`} component={RegisterProduct} />
 								<Route exact path={`${this.props.match.url}${this.state.isAdmin ? '/klient/:userId' : ''}/product/:productId`} component={UserProduct} />
 								<Route path={`${this.props.match.url}${this.state.isAdmin ? '/klient/:userId' : ''}/product/:productId/report`} component={ReportError} />
+								<Route path={`${this.props.match.url}${this.state.isAdmin ? '/klient/:userId' : ''}/product/:productId/service`} component={ReportService} />
 								<Route exact path={`${this.props.match.url}/klient/:userId`} component={ClientPreview} />
 								<Route exact path={`${this.props.match.url}/orders`} component={Orders} />
 								<Route exact path={`${this.props.match.url}/users`} component={Users} />
