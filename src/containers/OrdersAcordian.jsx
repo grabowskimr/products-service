@@ -10,7 +10,7 @@ const OrdersAcordian = ({items, isService, showContent, serviceUsers, changeServ
         <div className="acc-item-title" data-id={item.id} onClick={showContent}>
           <span className="acc-item-id">Id: {item.id}</span>
           <span>Produkt: {item.name}</span>
-          <span>Id Produktu: {item.product_id}</span>
+          <span>Kod pocztowy: {item.postcode}</span>
           <span>{item.type === 'service' ? 'Serwis' : 'Usterka'}</span>
           {!isService ? <span className="with-events">Przypisane: <select value={item.service_id} onChange={(e) => changeServiceUser(e, item.id)}>
               <option value={0}>Nie przypisano</option>

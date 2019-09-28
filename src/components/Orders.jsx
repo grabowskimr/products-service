@@ -64,6 +64,7 @@ class Orders extends Component {
   }
 
   render() {
+    console.log(this.state.orders);
     return (
       <Box size={100} title="Zgłoszenia" list>
         {this.state.orders.length ? 

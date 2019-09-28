@@ -129,6 +129,7 @@ export const addUserProduct = (data) => (dispatch) => {
 	return api.post('addUserProduct', data).then(({data}) => {
 		dispatch(showMessage(data));
 		dispatch(actions.hideLoader());
+		return data;
 	})
 }
 
@@ -414,4 +415,21 @@ export const getServiceUser = (params) => (dispatch) => {
 		dispatch(actions.hideLoader());
 		return data;
 	})
+}
+
+export const addRecord = (data) => (dispatch) => {
+	dispatch(actions.showLoader());
+	return api.post('addRecord', data, false).then(({data}) => {
+		dispatch(showMessage(data));
+		dispatch(actions.hideLoader());
+		return data;
+	})
+}
+
+export const getRecords = () => (dispatch) => {
+	dispatch(actions.showLoader());
+		return api.get('getRecords', false).then((product) => {
+			dispatch(actions.hideLoader());
+			return product.data;
+		})
 }

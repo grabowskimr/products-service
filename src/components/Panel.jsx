@@ -21,6 +21,7 @@ import Product from './Product';
 import Users from './Users';
 import AddUser from './AddUser';
 import ReportService from './ReportService';
+import AddRecords from './AddRecords';
 import { setUserId, hideSidebar } from '../actions/actions';
 import { getInitialData } from '../actions/apiCalls';
 
@@ -70,7 +71,7 @@ class Panel extends Component {
 							<Sidebar userId={this.props.cookies.get('login') && this.props.cookies.get('login').id} />
 							<MainContent hideSidebar={this.props.hideSidebar}>
 								{this.props.cookies.get('login') && this.props.history.location.pathname !== `/panel/${this.props.cookies.get('login').id}/home` && <button className="back-arrow" onClick={this.backToHome}><span className="arrow arrow-bar is-left"></span> Strona główna</button>}
-								<Route path={`${this.props.match.url}/home`} component={this.state.profile === 'admin' ? HomeAdmin : (this.state.profile === 'coordinate' || this.state.profile === 'service') ? Orders : Client} />
+								<Route path={`${this.props.match.url}/home`} component={this.state.profile === 'admin' ? HomeAdmin : (this.state.profile === 'coordinate' || this.state.profile === 'service') ? Orders : this.state.profile === 'adder' ? AddRecords : Client} />
 								<Route path={`${this.props.match.url}/register`} component={RegisterProduct} />
 								<Route exact path={`${this.props.match.url}${this.state.isAdmin ? '/klient/:userId' : ''}/product/:productId`} component={UserProduct} />
 								<Route path={`${this.props.match.url}${this.state.isAdmin ? '/klient/:userId' : ''}/product/:productId/report`} component={ReportError} />
@@ -83,6 +84,7 @@ class Panel extends Component {
 								<Route exact path={`${this.props.match.url}/products`} component={Products} />
 								<Route exact path={`${this.props.match.url}/products/:id`} component={Product} />
 								<Route exact path={`${this.props.match.url}/adduser`} component={AddUser} />
+								<Route exact path={`${this.props.match.url}/records`} component={AddRecords} />
 							</MainContent>
 						</PanelContent>
 				</div>}

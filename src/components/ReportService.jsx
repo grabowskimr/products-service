@@ -61,7 +61,7 @@ class ReportService extends Component {
     return (
       <Box title="Zgłoś serwis">
         <form onSubmit={this.submit}>
-          <Input type="textarea" label="Opis(Opisz problem, podaj adres pod którym znajduje się maszyna)" name="description" value={this.state.description} onChange={this.onChange}/>
+          <Input type="textarea" label="Opis(Podaj opis oraz miejsce postoju urządzenia)" name="description" value={this.state.description} onChange={this.onChange}/>
           <button type="submit">Wyślij</button>
         </form>
       </Box>

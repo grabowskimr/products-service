@@ -56,8 +56,8 @@ class ReportError extends Component {
     return (
       <Box title="Zgłoś usterkę">
         <form onSubmit={this.submit}>
-          <Input type="text" label="Tytuł usterki" name="title" value={this.state.title} onChange={this.onChange} />
-          <Input type="textarea" label="Opis" name="description" value={this.state.description}  onChange={this.onChange}/>
+          <Input type="text" label="Tytuł usterki" name="title" value={this.state.title} onChange={this.onChange} required />
+          <Input type="textarea" label="Opis(Podaj opis oraz miejsce postoju urządzenia)" name="description" value={this.state.description}  onChange={this.onChange} required/>
           <Input type="file" label="Zdjecie" name="file" onChange={this.onChangeFile} />
           <button type="submit">Wyślij</button>
         </form>

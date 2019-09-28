@@ -44,10 +44,12 @@ class Order extends Component {
           productId: this.state.order.product_id,
           statusType: this.state.order.type === 'service' ? 'status_reqular_fix' : 'status',
           resolve: this.state.order.resolve,
-          endDate: this.state.endDate
+          endDate: new Date()
         }).then(() => {
-          this.setState({
-            order: {...this.state.order, status: 0}
+          this.props.getOrder({id: this.props.match.params.id}).then(data => {
+            this.setState({
+              order: data
+            })
           })
         });
       }
@@ -60,12 +62,6 @@ class Order extends Component {
     let order = Object.assign(this.state.order, {resolve: e.target.value});
     this.setState({
       order: order
-    })
-  }
-
-  changeDate = (date) => {
-    this.setState({
-      endDate: date
     })
   }
 
@@ -87,7 +83,6 @@ class Order extends Component {
           {this.state.order.status === '1' && <div className="order-actions">
             <form onSubmit={this.changeStatus}>
               <Input type="textarea" required label="Opis wykonanej pracy" name="description" value={this.state.order.resolve} onChange={this.onChange}/>
-              <Input type="date" label="Data" value={this.state.endDate} onChange={this.changeDate} placeholder="Data" required />
               <button className="order-btn" type="submit">Zakończ zgłoszenie</button>
             </form>
           </div>}

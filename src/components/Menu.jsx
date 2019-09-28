@@ -11,7 +11,7 @@ class Menu extends Component {
     super(props);
     this.state = {
       isAdmin: this.props.cookies.get('login').profile === 'admin' ? true : false,
-      isEmploye: (this.props.cookies.get('login').profile === 'service' || this.props.cookies.get('login').profile === 'coordinate') ? true : false
+      isEmploye: (this.props.cookies.get('login').profile === 'service' || this.props.cookies.get('login').profile === 'coordinate' || this.props.cookies.get('login').profile === 'adder') ? true : false
     };
   }
 
@@ -27,6 +27,7 @@ class Menu extends Component {
           {this.state.isAdmin && <li onClick={this.props.toggleSidebar}><Link to={`${panelUrl}/${this.props.userId}/edit`}>Dodaj produkt</Link></li>}
           {this.state.isAdmin && <li onClick={this.props.toggleSidebar}><Link to={`${panelUrl}/${this.props.userId}/users`}>Pracownicy</Link></li>}
           {this.state.isAdmin && <li onClick={this.props.toggleSidebar}><Link to={`${panelUrl}/${this.props.userId}/adduser`}>Dodaj pracownika</Link></li>}
+          {this.state.isAdmin && <li onClick={this.props.toggleSidebar}><Link to={`${panelUrl}/${this.props.userId}/records`}>Rekordy</Link></li>}
         </ul>
       </div>
     )

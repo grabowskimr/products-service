@@ -28,8 +28,10 @@ class RegisterProduct extends Component {
       ...this.state,
       userId: this.props.userId
     };
-    this.props.addUserProduct(data).then(() => {
-      this.props.history.push(`/panel/${this.props.userId}/home`);
+    this.props.addUserProduct(data).then((data) => {
+      if(data.status) {
+        this.props.history.push(`/panel/${this.props.userId}/home`);
+      }
     });
   }
 

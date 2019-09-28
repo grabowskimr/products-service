@@ -20,7 +20,8 @@ class AddUser extends Component {
     };
     this.options = [
       {id: 'service', name: 'Serwisant'},
-      {id: 'coordinate', name: 'Kordynator'}
+      {id: 'coordinate', name: 'Kordynator'},
+      {id: 'adder', name: 'Rejestrator'}
     ]
   }
 

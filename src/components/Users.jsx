@@ -82,7 +82,7 @@ class Users extends Component {
               <span>{user.firstname} {user.lastname}</span>
               <span>{user.email}</span>
               <span>{user.tel}</span>
-              <span>{user.profile === 'service' ? 'Serwisant' : 'Kordynator'}</span>
+              <span>{user.profile === 'service' ? 'Serwisant' : user.profile === 'adder' ? 'Rejestrator' : 'Kordynator'}</span>
             </span>
             <button data-id={user.id} className="remove-client-btn" onClick={this.remove}>Usuń</button>
             </div>
