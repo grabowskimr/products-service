@@ -433,3 +433,11 @@ export const getRecords = () => (dispatch) => {
 			return product.data;
 		})
 }
+
+export const getUser = (params) => (dispatch) => {
+	dispatch(actions.showLoader());
+		return api.get('getUser', false, params).then((product) => {
+			dispatch(actions.hideLoader());
+			return product.data[0];
+		})
+}

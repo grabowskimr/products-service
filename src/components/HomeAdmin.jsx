@@ -67,8 +67,6 @@ class HomeAdmin extends Component {
             <span>Login</span>
             <span>Imie i nazwisko</span>
             <span>Firma</span>
-            <span>E-mail</span>
-            <span>Telefon</span>
           </div>
           {this.state.users.map((user) => (
             <div className="client-record" key={user.id}>
@@ -77,8 +75,6 @@ class HomeAdmin extends Component {
               <span>{user.login}</span>
               <span>{user.firstname} {user.lastname}</span>
               <span>{user.company}</span>
-              <span>{user.email}</span>
-              <span>{user.tel}</span>
             </Link>
             <button data-id={user.id} className="remove-client-btn" onClick={this.remove}>Usuń</button>
             </div>
