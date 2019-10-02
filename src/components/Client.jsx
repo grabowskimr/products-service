@@ -33,7 +33,7 @@ class Client extends Component {
   render() {
     return (
       <>
-        <Box title="Informacje o kliencie" size={100}>
+        {this.state.user && this.state.user.id ? <Box title="Informacje o kliencie" size={100}>
           <div className="acc-item-content">
             <div className="acc-information">
               <div className="acc-row">
@@ -50,7 +50,7 @@ class Client extends Component {
               </div>
             </div>
           </div>
-        </Box>
+        </Box> : null}
         {this.props.children}
         <Search filterMethod={this.search} placeholder="Szukaj: Nazwa, Numer fabryczny urządzenia"/>
         <ProductList userId={this.props.userId}/>
