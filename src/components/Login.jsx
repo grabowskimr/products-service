@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { withCookies } from 'react-cookie';
 import { hexMd5 } from 'front-md5';
+import ReCAPTCHA from "react-google-recaptcha";
 
 import LoginContainer from "../containers/LoginContainer";
 import Input from '../containers/Input';
@@ -23,7 +24,8 @@ class Login extends Component {
 				company: '',
 				address: '',
 				postcode: '',
-				tel: ''
+				tel: '',
+				captcha: ''
 			}
 		}
 	}
@@ -43,10 +45,12 @@ class Login extends Component {
 
 	register = (e) => {
 		e.preventDefault();
-		this.props.registerToApp(this.state.form).then(() => {
-			this.setState({
-				showRegister: !this.state.showRegister
-			})
+		this.props.registerToApp(this.state.form).then((data) => {
+			if(data.status) {
+				this.setState({
+					showRegister: !this.state.showRegister
+				})
+			}
 		})
 	}
 
@@ -83,6 +87,15 @@ class Login extends Component {
 		});
 	}
 
+	captchaOnChange = (value) => {
+		this.setState({
+			form: {
+				...this.state.form,
+				captcha: value
+			}
+		});
+	}
+
   render() {
     return (
 			<LoginContainer onShowRegister={this.onShowRegister} showRegister={this.state.showRegister} toggleResetPassword={this.toggleResetPassword} togglePasswordReset={this.state.togglePasswordReset}>
@@ -107,6 +120,9 @@ class Login extends Component {
 					<Input type="text" required placeholder="Adres" label="Adres" name="address" value={this.state.form.address} onChange={this.changeFormData}/>
 					<Input type="text" required placeholder="Kod Pocztowy" label="Kod pocztywy" name="postcode" value={this.state.form.postcode} onChange={this.changeFormData}/>
 					<Input type="text" required placeholder="Telefon" label="Telefon" name="tel" value={this.state.form.tel} onChange={this.changeFormData}/>
+					<div className="re-captcha">
+						<ReCAPTCHA sitekey="6LfCp7sUAAAAAO33Zl25ZS_DiBfNjTdAgYrsjs6J" onChange={this.captchaOnChange}/>
+					</div>
 					<button type="submit">Zarejestruj się</button>
 				</form>}
 				{this.state.togglePasswordReset ? <form onSubmit={this.resetPassword}>
