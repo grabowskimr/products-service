@@ -61,6 +61,10 @@ class Panel extends Component {
 		this.props.history.push(`/panel/${this.props.cookies.get('login').id}/home`);
 	}
 
+	backPrev = () => {
+		window.history.back();
+	}
+
   render() {
     return (
 			<>
@@ -70,7 +74,7 @@ class Panel extends Component {
 						<PanelContent>
 							<Sidebar userId={this.props.cookies.get('login') && this.props.cookies.get('login').id} />
 							<MainContent hideSidebar={this.props.hideSidebar}>
-								{this.props.cookies.get('login') && this.props.history.location.pathname !== `/panel/${this.props.cookies.get('login').id}/home` && <button className="back-arrow" onClick={this.backToHome}><span className="arrow arrow-bar is-left"></span> Strona główna</button>}
+								{(this.props.cookies.get('login') && this.props.history.location.pathname !== `/panel/${this.props.cookies.get('login').id}/home`) ? (this.props.history.location.pathname.includes('orders/')) ?  <button className="back-arrow" onClick={this.backPrev}><span className="arrow arrow-bar is-left"></span> Wstecz</button> :  <button className="back-arrow" onClick={this.backToHome}><span className="arrow arrow-bar is-left"></span> Strona główna</button> : null}
 								<Route path={`${this.props.match.url}/home`} component={this.state.profile === 'admin' ? HomeAdmin : (this.state.profile === 'coordinate' || this.state.profile === 'service') ? Orders : this.state.profile === 'adder' ? AddRecords : Client} />
 								<Route path={`${this.props.match.url}/register`} component={RegisterProduct} />
 								<Route exact path={`${this.props.match.url}${this.state.isAdmin ? '/klient/:userId' : ''}/product/:productId`} component={UserProduct} />

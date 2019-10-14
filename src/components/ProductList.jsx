@@ -78,6 +78,8 @@ class ProductList extends Component {
                 userId={this.props.userId} 
                 isAdmin={this.state.isAdmin} 
               />;
+            } else {
+              return null;
             }
           })}
         </List> : 

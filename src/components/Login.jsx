@@ -8,6 +8,7 @@ import LoginContainer from "../containers/LoginContainer";
 import Input from '../containers/Input';
 import { clearLoginError, setProfile } from '../actions/actions';
 import { registerToApp, loginToApp, addResetHash } from '../actions/apiCalls';
+import Copy from "../static/images/slice1.png";
 
 class Login extends Component {
 	constructor(props) {
@@ -131,6 +132,9 @@ class Login extends Component {
 					<Input type="email" placeholder="E-mail" label="Email" name="email" value={this.state.form.email} onChange={this.changeFormData}/>
 					<button type="submit">Resetuj hasło</button>
 				</form> : null}
+				<div className="copy">
+					<img src={Copy} alt="copy" />
+				</div>
 		</LoginContainer>
     );
   }

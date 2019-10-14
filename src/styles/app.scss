@@ -632,3 +632,15 @@ button,
 		@include arrowColor(#fff);
 	}
 }
+.copy {
+	position: fixed;
+	bottom: 0px;
+	right: 0px;
+	width: 600px;
+	max-width: 100%;
+	padding: 20px;
+	box-sizing: border-box;
+	img {
+		width: 100%;
+	}
+}
