@@ -1,23 +1,23 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux';
-import { withCookies } from 'react-cookie';
+import React, {Component} from 'react';
+import Box from "../containers/Box";
+import Input from "../containers/Input";
+import {connect} from "react-redux";
 
-import Box from '../containers/Box';
-import Input from '../containers/Input';
 import { setStatus, checkIfOrderExist } from '../actions/apiCalls';
+import {withCookies} from "react-cookie";
 
-class ReportError extends Component {
+class OrderParts extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: '',
+      title: 'Części',
       description: '',
       file: '',
       userId: this.props.cookies.get('login').id,
       productId: this.props.match.params.productId,
-      type: 'report',
+      type: 'parts',
       email: this.props.email,
-      method: 'saveErrorData'
+      method: 'setPartsOrder'
     };
   }
 
@@ -45,7 +45,7 @@ class ReportError extends Component {
 
   submit = (e) => {
     e.preventDefault();
-    let confirmValue = window.confirm('Zgłosić serwis?');
+    let confirmValue = window.confirm('Zamówić części?');
     if(confirmValue) {
       this.props.setStatus(this.state).then(() => {
         this.props.history.push(`/panel/${this.state.userId}/home`);
@@ -55,10 +55,9 @@ class ReportError extends Component {
 
   render() {
     return (
-      <Box title="Zgłoś usterkę">
+      <Box title="Zamów częsci">
         <form onSubmit={this.submit}>
-          <Input type="text" label="Tytuł usterki" name="title" value={this.state.title} onChange={this.onChange} required />
-          <Input type="textarea" label="Opis(Podaj opis oraz miejsce postoju urządzenia)" name="description" value={this.state.description}  onChange={this.onChange} required/>
+          <Input type="textarea" label="Podaj nazwy części(nazwa lub index)" name="description" value={this.state.description}  onChange={this.onChange} required/>
           <Input type="file" label="Zdjecie" name="file" onChange={this.onChangeFile} />
           <button type="submit">Wyślij</button>
         </form>
@@ -73,4 +72,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, {setStatus, checkIfOrderExist})(withCookies(ReportError));
+export default connect(mapStateToProps, {checkIfOrderExist, setStatus})(withCookies(OrderParts));

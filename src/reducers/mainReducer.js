@@ -113,6 +113,28 @@ const mainReducer = (state = {
 				...state,
 				userProducts: updatedUserProductsReports
 			}
+		case ACTION.CHANGE_REPAIR_STATUS:
+			let updatedUserProductsRepair = state.userProducts.map(product => {
+				if(product.id === action.payload.id) {
+					product.repair = '0';
+				}
+				return product;
+			});
+			return {
+				...state,
+				userProducts: updatedUserProductsRepair
+			}
+		case ACTION.CHANGE_PARTS_STATUS:
+			let updatedUserProductsParts = state.userProducts.map(product => {
+				if(product.id === action.payload.id) {
+					product.parts = '0';
+				}
+				return product;
+			});
+			return {
+				...state,
+				userProducts: updatedUserProductsParts
+			}
 		case ACTION.SHOW_MESSAGE:
 			return {
 				...state,

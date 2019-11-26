@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux';
-import { withCookies } from 'react-cookie';
+import React, {Component} from 'react';
+import Box from "../containers/Box";
+import Input from "../containers/Input";
+import {connect} from "react-redux";
 
-import Box from '../containers/Box';
-import Input from '../containers/Input';
 import { setStatus, checkIfOrderExist } from '../actions/apiCalls';
+import {withCookies} from "react-cookie";
 
-class ReportError extends Component {
+class PostWarrantyRepair extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,9 +15,9 @@ class ReportError extends Component {
       file: '',
       userId: this.props.cookies.get('login').id,
       productId: this.props.match.params.productId,
-      type: 'report',
+      type: 'repair',
       email: this.props.email,
-      method: 'saveErrorData'
+      method: 'setStatusRepair'
     };
   }
 
@@ -45,7 +45,7 @@ class ReportError extends Component {
 
   submit = (e) => {
     e.preventDefault();
-    let confirmValue = window.confirm('Zgłosić serwis?');
+    let confirmValue = window.confirm('Zgłosić naprawe pogwarancyjną?');
     if(confirmValue) {
       this.props.setStatus(this.state).then(() => {
         this.props.history.push(`/panel/${this.state.userId}/home`);
@@ -55,7 +55,7 @@ class ReportError extends Component {
 
   render() {
     return (
-      <Box title="Zgłoś usterkę">
+      <Box title="Zgłoś naprawę pogwarancyjną">
         <form onSubmit={this.submit}>
           <Input type="text" label="Tytuł usterki" name="title" value={this.state.title} onChange={this.onChange} required />
           <Input type="textarea" label="Opis(Podaj opis oraz miejsce postoju urządzenia)" name="description" value={this.state.description}  onChange={this.onChange} required/>
@@ -73,4 +73,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, {setStatus, checkIfOrderExist})(withCookies(ReportError));
+export default connect(mapStateToProps, {checkIfOrderExist, setStatus})(withCookies(PostWarrantyRepair));

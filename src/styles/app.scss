@@ -307,6 +307,7 @@ button,
 					display: flex;
 					justify-content: center;
 					align-items: center;
+					white-space: pre-line;
 				}
 			}
 			& > * {
@@ -319,6 +320,9 @@ button,
 		&.hide {
 			display: none;
 		}
+	}
+	.small-column {
+		max-width: 100px;
 	}
 }
 .search {

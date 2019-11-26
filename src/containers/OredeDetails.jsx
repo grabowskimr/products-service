@@ -14,8 +14,8 @@ const OrderDetails = (props) => {
       <div className="acc-information">
         <div className="acc-row">
           <Label title="Data zgłoszenia" value={item.date}/>
-          <Label title="Typ zgłoszenia" value={item.type === 'service' ? 'Serwis' : 'Usterka'}/>
-          <Label title="ID zgłoszenia" value={item.id}/>
+          <Label title="Typ zgłoszenia" value={item.type === 'service' ? 'Serwis' : item.type === 'repair' ? 'Naprawa pogwarancyjna' : item.type === 'parts' ? 'Części' : 'Usterka'}/>
+          <Label title="ID zgłoszenia" value={item.record_index ? item.record_index : item.id}/>
           <Label title="Nazwa produktu" value={item.name}/>
         </div>
         {item.type !== 'service' && <div className="acc-row desc">

@@ -5,7 +5,7 @@ import { withCookies } from 'react-cookie';
 import Box from '../containers/Box';
 import List from '../containers/List';
 import ProductItemList from '../containers/ProductItemList';
-import { getUserProducts, setStatusService, changeServiceStatus, changeReportStatus } from '../actions/apiCalls';
+import { getUserProducts, changeServiceStatus } from '../actions/apiCalls';
 
 class ProductList extends Component {
   constructor(props) {
@@ -14,8 +14,8 @@ class ProductList extends Component {
       titles: [
         {name: 'Nazwa', flex: 1},
         {name: 'Numer fabryczny urządzenia', flex: 1},
-        {name: 'Data zakupu', flex: 1},
-        {name: 'Gwarancja', flex: 1},
+        {name: 'Data zakupu', flex: 1, additionalClass: 'small-column'},
+        {name: 'Gwarancja', flex: 1, additionalClass: 'small-column'},
         {name: 'Akcje', flex: 2}
       ],
       isAdmin: this.props.cookies.get('login').profile === 'admin' ? true : false
@@ -45,7 +45,8 @@ class ProductList extends Component {
         id: e.target.dataset.product,
         userId: this.props.userId,
         type: 'service',
-        status: 0
+        status: 0,
+        method: 'serviceStatus'
       });
     }
   }
@@ -53,14 +54,41 @@ class ProductList extends Component {
   changeReportStatus = (e) => {
     let confirmValue = window.confirm('Zmienić status?');
     if(confirmValue) {
-      this.props.changeReportStatus({
+      this.props.changeServiceStatus({
         id: e.target.dataset.product,
         userId: this.props.userId,
         type: 'report',
-        status: 0
+        status: 0,
+        method: 'reportStatus'
       });
     }
   }
+
+  changeRepairStatus = (e) => {
+    let confirmValue = window.confirm('Zmienić status?');
+    if(confirmValue) {
+      this.props.changeServiceStatus({
+        id: e.target.dataset.product,
+        userId: this.props.userId,
+        type: 'repair',
+        status: 0,
+        method: 'repairStatus'
+      });
+    }
+  };
+
+  changePartsStatus = (e) => {
+    let confirmValue = window.confirm('Zmienić status?');
+    if(confirmValue) {
+      this.props.changeServiceStatus({
+        id: e.target.dataset.product,
+        userId: this.props.userId,
+        type: 'parts',
+        status: 0,
+        method: 'partsStatus'
+      });
+    }
+  };
 
   render() {
     return (
@@ -75,6 +103,8 @@ class ProductList extends Component {
                 orderService={this.orderService} 
                 changeServiceStatus={this.changeServiceStatus} 
                 changeReportStatus={this.changeReportStatus}
+                changeRepairStatus={this.changeRepairStatus}
+                changePartsStatus={this.changePartsStatus}
                 userId={this.props.userId} 
                 isAdmin={this.state.isAdmin} 
               />;
@@ -95,4 +125,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, {getUserProducts, setStatusService, changeServiceStatus, changeReportStatus})(withCookies(ProductList));
+export default connect(mapStateToProps, {getUserProducts, changeServiceStatus})(withCookies(ProductList));

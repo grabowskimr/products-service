@@ -42,7 +42,7 @@ class Order extends Component {
           userId: this.state.order.user_id,
           type: this.state.order.type,
           productId: this.state.order.product_id,
-          statusType: this.state.order.type === 'service' ? 'status_reqular_fix' : 'status',
+          statusType: this.state.order.type === 'service' ? 'status_reqular_fix' : this.state.order.type === 'repair' ? 'repair' : this.state.order.type === 'parts' ? 'parts' : 'status',
           resolve: this.state.order.resolve,
           endDate: new Date()
         }).then(() => {

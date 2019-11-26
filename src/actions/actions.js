@@ -59,17 +59,26 @@ const apiActions = {
 			}
 		}
 	},
-	changeServiceStatus: (id) => {
-		return {
-			type: ACTION.CHANGE_SERVICE_STATUS,
-			payload: {
-				id
-			}
+	changeStatus: (type, id) => {
+		let actionType = null;
+		switch(type) {
+			case 'service':
+				actionType = ACTION.CHANGE_SERVICE_STATUS;
+				break;
+			case 'report':
+				actionType = ACTION.CHANGE_REPORT_STATUS;
+				break;
+			case 'repair':
+				actionType = ACTION.CHANGE_REPAIR_STATUS;
+				break;
+			case 'parts':
+				actionType = ACTION.CHANGE_PARTS_STATUS;
+				break;
+			default:
+				actionType = ACTION.CHANGE_SERVICE_STATUS;
 		}
-	},
-	changeReportStatus: (id) => {
 		return {
-			type: ACTION.CHANGE_REPORT_STATUS,
+			type: actionType,
 			payload: {
 				id
 			}

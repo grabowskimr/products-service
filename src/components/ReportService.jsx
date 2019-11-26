@@ -4,7 +4,7 @@ import { withCookies } from 'react-cookie';
 
 import Box from '../containers/Box';
 import Input from '../containers/Input';
-import { setStatusService, checkIfReportExist } from '../actions/apiCalls';
+import { setStatusService, checkIfOrderExist } from '../actions/apiCalls';
 
 class ReportService extends Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class ReportService extends Component {
   }
 
   componentDidMount() {
-    this.props.checkIfReportExist(this.state).then(data => {
+    this.props.checkIfOrderExist(this.state).then(data => {
       if(!data.status) {
         this.props.history.push(`/panel/${this.state.userId}/home`);
       }
@@ -75,4 +75,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, {setStatusService, checkIfReportExist})(withCookies(ReportService));
+export default connect(mapStateToProps, {setStatusService, checkIfOrderExist})(withCookies(ReportService));

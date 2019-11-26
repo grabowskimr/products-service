@@ -158,27 +158,16 @@ export const setStatusService = (service) => (dispatch) => {
 
 export const changeServiceStatus = (service) => (dispatch) => {
 	dispatch(actions.showLoader());
-	return api.post('changeServiceStatus', service).then(({data}) => {
+	return api.post(service.method, service).then(({data}) => {
 		if(data.status) {
-			dispatch(actions.changeServiceStatus(service.id));
+			dispatch(actions.changeStatus(service.type, service.id));
 		}
 		dispatch(showMessage(data));
 		dispatch(actions.hideLoader());
 	});
 }
 
-export const changeReportStatus = (service) => (dispatch) => {
-	dispatch(actions.showLoader());
-	return api.post('changeReportStatus', service).then(({data}) => {
-		if(data.status) {
-			dispatch(actions.changeReportStatus(service.id));
-		}
-		dispatch(showMessage(data));
-		dispatch(actions.hideLoader());
-	});
-}
-
-export const sendErrorReport = (errorData) => (dispatch) => {
+export const setStatus = (errorData) => (dispatch) => {
 	errorData.date = new Date();
 	dispatch(actions.showLoader());
 	const formData = new FormData();
@@ -189,7 +178,7 @@ export const sendErrorReport = (errorData) => (dispatch) => {
 		}
 	}
 	if(!errorData.file) {
-		return api.post('saveErrorData', errorData).then(({data}) => {
+		return api.post(errorData.method, errorData).then(({data}) => {
 			dispatch(showMessage(data));
 			dispatch(actions.hideLoader());
 		});
@@ -202,7 +191,7 @@ export const sendErrorReport = (errorData) => (dispatch) => {
 		} else {
 			const filePath = response.data.message;
 			errorData.file = filePath;
-			return api.post('saveErrorData', errorData).then(({data}) => {
+			return api.post(errorData.method, errorData).then(({data}) => {
 				dispatch(showMessage(data));
 				dispatch(actions.hideLoader());
 			});
@@ -210,9 +199,9 @@ export const sendErrorReport = (errorData) => (dispatch) => {
 	});
 }
 
-export const checkIfReportExist = (service) => (dispatch) => {
+export const checkIfOrderExist = (service) => (dispatch) => {
 	dispatch(actions.showLoader());
-	return api.post('checkReportstatus', service).then(({data}) => {
+	return api.post('checkIfOrderExist', service).then(({data}) => {
 		if(data.status) {
 			dispatch(actions.hideLoader());
 			return data;

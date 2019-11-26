@@ -71,7 +71,7 @@ class UserProduct extends Component {
         </div>
         {this.state.history.map((story) => (
           <div key={story.id} className="history-item">
-            <span>{story.id}</span>
+            <span>{story.record_index ? story.record_index : story.id}</span>
             <span>{story.service_id === '0' ? 'Nie przypisano' : story.service_id}</span>
             <span>{story.date}</span>
             {story.type === "service" ? <span>Serwis</span> : <span>{story.title}</span>}
